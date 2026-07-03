@@ -8,17 +8,16 @@ library(Rcpp)
 ### ---------- Parameters ----------
 
 # Election system parameters
-# define party colors (taken from https://en.wikipedia.org/wiki/Category:Germany_political_party_colour_templates)
-partycolors <- c('#EB001F', '#000000', '#64A12D', '#FFED00', '#009EE0', '#BE3075', '#F7A800', '#792350')
+# Approve = Green, Disapprove = Red, Unsure = Grey
+partycolors <- c('#2ca02c', '#d62728', '#7f7f7f')
 
-startdate <- '2021-09-26'   # date of previous election
-enddate <- '2025-02-23'     # (latest) date of next election
-threshold <- 5              # dashed horizontal line (election threshold in %)
+startdate <- '2025-05-26'   # date of previous election
+enddate <- '2026-07-01'     # (latest) date of next election
 
 # Figure parameters
 # individual smoothing parameter for each party's trend line
 # this parameter must be decreased when the number of polls increases
-partyspansize <- c(0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25)
+approvalspansize <- c(0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25)
 
 transp <-'55'               # transparency level of points
 nnum <- 500                 # number of points used for trendline (resolution)

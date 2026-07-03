@@ -28,7 +28,12 @@ graph_height <- 8           # image height
 
 ### ---------- Plotting code ----------
 
-polls <- read.table("de.csv", header=T, sep=",", fileEncoding="UTF-8", stringsAsFactors=FALSE)
+polls <- read.table(
+                    "de.csv",
+                    header=TRUE,
+                    sep=",",
+                    fileEncoding="UTF-8",
+                    stringsAsFactors=FALSE)
 polls$polldate <- as.Date(anydate(polls$polldate))
 
 # retrieve party names from CSV

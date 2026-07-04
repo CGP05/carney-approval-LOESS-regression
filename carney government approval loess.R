@@ -9,13 +9,13 @@ library(Rcpp)
 
 # Election system parameters
 # Approve = Green, Disapprove = Red, Unsure = Grey
-partycolors <- c("#2ca02c", "#d62728", "#7f7f7f")
+approvalcolors <- c("#2ca02c", "#d62728", "#7f7f7f")
 
 startdate <- "2025-05-26"   # date of previous election
 enddate <- "2026-07-01"     # (latest) date of next election
 
 # Figure parameters
-# individual smoothing parameter for each party"s trend line
+# individual smoothing parameter for the trend line of the 3 approval states
 # this parameter must be decreased when the number of polls increases
 approvalspansize <- c(0.25, 0.25, 0.25)
 
@@ -36,14 +36,14 @@ polls <- read.table(
                     stringsAsFactors = FALSE)
 polls$polldate <- as.Date(anydate(polls$polldate))
 
-# retrieve party names from CSV
-partynames <- colnames(polls)[2:ncol(polls)]
+# retrieve the 3 approval states from CSV
+approvalstatenames <- colnames(polls)[2:ncol(polls)]
 # remove potential leading/trailing spaces so names match exactly
-partynames <- trimws(partynames)
+approvalstates <- trimws(approvalstates)
 
 # safety check: same number of parties and colors
-if (length(partycolors) != length(partynames)) {
-  stop("The number of 'partycolors' must match the number of parties.")
+if (length(approvalcolors) != length(partynames)) {
+  stop("The number of 'partycolors' must match the three state.")
 }
 
 # convert to long format (needed for legend & per-party smoothing)

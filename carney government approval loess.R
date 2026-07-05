@@ -67,7 +67,6 @@ graph <- ggplot() +
 # add poll points per party
 for (i in seq_along(partynames)) {
   pdata <- subset(polls_long, party == partynames[i])
-  
   graph <- graph + geom_point(
     data = pdata,
     aes(x = polldate, y = value),
@@ -81,7 +80,6 @@ for (i in seq_along(partynames)) {
 # add trend lines per party
 for (i in seq_along(partynames)) {
   pdata <- subset(polls_long, party == partynames[i])
-  
   graph <- graph + geom_smooth(
     data = pdata,
     aes(x = polldate, y = value, color = party),
@@ -94,12 +92,10 @@ for (i in seq_along(partynames)) {
 
 # customize graph
 graph <- graph +
-  
   # y-axis: add % and custom limits
   scale_y_continuous(
     labels = function(x) paste0(x, "%"),
     limits = limits) +
-  
   # x-axis: 1 month grid, labels every 3 months
   scale_x_date(
     limits = as.Date(c(startdate, enddate)),
@@ -132,9 +128,13 @@ graph <- graph +
 
 graph
 
-ggsave(file = "polls.svg", plot = graph, width = graph_width, height = graph_height)
+ggsave(
+       file = "polls.svg",
+       plot = graph,
+       width = graph_width,
+       height = graph_height)
 
 # workaround since svglite doesn"t properly work in Wikipedia
-aaa=readLines("polls.svg", -1)
+aaa <- readLines("polls.svg", -1)
 bbb <- gsub(".svglite ", "", aaa)
 writeLines(bbb, "polls.svg")

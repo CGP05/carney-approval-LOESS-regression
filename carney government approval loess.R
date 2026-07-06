@@ -6,7 +6,6 @@ library(svglite)
 library(Rcpp)
 
 ### ---------- Parameters ----------
-
 # Election system parameters
 # Approve = Green, Disapprove = Red, Unsure = Grey
 approvalcolors <- c("#2ca02c", "#d62728", "#7f7f7f")
@@ -27,7 +26,6 @@ graph_height <- 8           # image height
 
 
 ### ---------- Plotting code ----------
-
 polls <- read.table(
                     "de.csv",
                     header = TRUE,

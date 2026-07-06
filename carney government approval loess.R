@@ -10,8 +10,8 @@ library(Rcpp)
 # Approve = Green, Disapprove = Red, Unsure = Grey
 approvalcolors <- c("#2ca02c", "#d62728", "#7f7f7f")
 
-startdate <- "2025-05-26"   # date of previous election
-enddate <- "2026-07-01"     # (latest) date of next election
+startdate <- "2025-03-14"   # date Carney was sworn in as Prime Minister
+enddate <- "2026-07-01"     # (latest) date of lastest poll in table
 
 # Figure parameters
 # individual smoothing parameter for the trend line of the 3 approval states
@@ -27,7 +27,7 @@ graph_height <- 8           # image height
 
 ### ---------- Plotting code ----------
 polls <- read.table(
-                    "de.csv",
+                    "carney government approval polls.csv",
                     header = TRUE,
                     sep = ",",
                     fileEncoding = "UTF-8",

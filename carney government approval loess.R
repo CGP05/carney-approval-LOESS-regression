@@ -59,10 +59,15 @@ polls_long$party <- factor(polls_long$party, levels = partynames)
 
 # start ggplot without global data so we can add per-party points
 graph <- ggplot() +
-  geom_vline(xintercept = as.Date(startdate), color = "#aaaaaabb") + #last election)
-  #geom_vline(xintercept = as.Date(enddate), color="#aaaaaabb") +         # vertical line (next election), comment out if unknown yet
-  geom_segment(aes(x = as.Date(startdate), xend = as.Date(enddate), y = threshold, yend = threshold),
-               color = "#666666bb", linetype = "dashed")      # horizontal line (election threshold 5%)
+  geom_vline(
+             xintercept = as.Date(startdate),
+             color = "#aaaaaabb") + #last election)
+  #geom_vline(xintercept = as.Date(enddate), color="#aaaaaabb") +
+  # vertical line (next election), comment out if unknown yet
+  geom_segment(aes(x = as.Date(startdate),
+                   xend = as.Date(enddate), y = threshold, yend = threshold),
+               color = "#666666bb",
+               linetype = "dashed")# horizontal line (election threshold 5%)
 
 # add poll points per party
 for (i in seq_along(partynames)) {
@@ -70,8 +75,12 @@ for (i in seq_along(partynames)) {
   graph <- graph + geom_point(
     data = pdata,
     aes(x = polldate, y = value),
-    size = ifelse(pdata$polldate == as.Date(startdate) | pdata$polldate == as.Date(enddate), 3, 1.5),
-    shape = ifelse(pdata$polldate == as.Date(startdate) | pdata$polldate == as.Date(enddate), 23, 21),
+    size = ifelse(
+                  pdata$polldate == as.Date(startdate) |
+                    pdata$polldate == as.Date(enddate), 3, 1.5),
+    shape = ifelse(
+                   pdata$polldate == as.Date(startdate) |
+                     pdata$polldate == as.Date(enddate), 23, 21),
     color = paste0(partycolors[i], transp),
     fill = paste0(partycolors[i], transp)
   )
@@ -94,17 +103,15 @@ for (i in seq_along(partynames)) {
 graph <- graph +
   # y-axis: add % and custom limits
   scale_y_continuous(
-    labels = function(x) paste0(x, "%"),
-    limits = limits) +
+                     labels = function(x) paste0(x, "%"),
+                     limits = limits) +
   # x-axis: 1 month grid, labels every 3 months
   scale_x_date(
-    limits = as.Date(c(startdate, enddate)),
-    date_minor_breaks = "1 months", 
-    date_breaks = "3 months", 
-    date_labels = "%b %Y") + 
-  
-  labs(x = "", y = "") + 
-  
+               limits = as.Date(c(startdate, enddate)),
+               date_minor_breaks = "1 months",
+               date_breaks = "3 months",
+               date_labels = "%b %Y") +
+  labs(x = "", y = "") +
   # apply colors and party names
   scale_color_manual(
     name = "",
@@ -112,7 +119,6 @@ graph <- graph +
     breaks = partynames,
     labels = partynames
   ) +
-  
   # legend appearance
   theme(
     axis.text.x = element_text(size = 11),
@@ -122,8 +128,8 @@ graph <- graph +
     legend.key.width = unit(24, "pt"),
     legend.key.height = unit(24, "pt"),
     legend.text = element_text(
-      size=16, 
-      margin = margin(b = 5, t = 5, unit = "pt"))
+                               size = 16,
+                               margin = margin(b = 5, t = 5, unit = "pt"))
   )
 
 graph

@@ -35,27 +35,27 @@ polls <- read.table(
 polls$polldate <- as.Date(anydate(polls$polldate))
 
 # retrieve the 3 approval states from CSV
-approvalstatenames <- colnames(polls)[2:ncol(polls)]
+approvalstates <- colnames(polls)[2:ncol(polls)]
 # remove potential leading/trailing spaces so names match exactly
 approvalstates <- trimws(approvalstates)
 
-# safety check: same number of parties and colors
-if (length(approvalcolors) != length(partynames)) {
-  stop("The number of 'partycolors' must match the three state.")
+# safety check: same number of approval states and colors
+if (length(approvalcolors) != length(approvalstates)) {
+  stop("The number of 'approvalstates' must match the three states.")
 }
 
-# convert to long format (needed for legend & per-party smoothing)
+# convert to long format (needed for legend & per approval state smoothing)
 polls_long <- polls |>
   pivot_longer(
-    cols = all_of(partynames),
-    names_to = "party",
+    cols = all_of(approvalstates),
+    names_to = "approval state",
     values_to = "value"
   )
 
-# ensure the party factor has the same order as "partynames"
-polls_long$party <- factor(polls_long$party, levels = partynames)
+# ensure the approval factor has the same order as "approvalstates"
+polls_long$approval <- factor(polls_long$approval, levels = approvalstates)
 
-# start ggplot without global data so we can add per-party points
+# start ggplot without global data so we can add per approval state points
 graph <- ggplot() +
   geom_vline(
              xintercept = as.Date(startdate),
@@ -67,9 +67,9 @@ graph <- ggplot() +
                color = "#666666bb",
                linetype = "dashed")# horizontal line (election threshold 5%)
 
-# add poll points per party
-for (i in seq_along(partynames)) {
-  pdata <- subset(polls_long, party == partynames[i])
+# add poll points per approval state
+for (i in seq_along(approvalstates)) {
+  pdata <- subset(polls_long, approval == approvalstates[i])
   graph <- graph + geom_point(
     data = pdata,
     aes(x = polldate, y = value),
@@ -79,19 +79,20 @@ for (i in seq_along(partynames)) {
     shape = ifelse(
                    pdata$polldate == as.Date(startdate) |
                      pdata$polldate == as.Date(enddate), 23, 21),
-    color = paste0(partycolors[i], transp),
-    fill = paste0(partycolors[i], transp)
+    color = paste0(approvalcolors[i], transp),
+    fill = paste0(approvalcolors[i], transp)
   )
 }
 
-# add trend lines per party
-for (i in seq_along(partynames)) {
-  pdata <- subset(polls_long, party == partynames[i])
+# add trend lines per approval state
+for (i in seq_along(approvalstates)) {
+  pdata <- subset(polls_long, approval == approvalstates[i])
   graph <- graph + geom_smooth(
     data = pdata,
-    aes(x = polldate, y = value, color = party),
+    aes(x = polldate, y = value, color = approval),
+
     method = "loess",
-    span = partyspansize[i],
+    span = approvalspansize[i],
     n = nnum,
     se = FALSE
   )
@@ -110,12 +111,12 @@ graph <- graph +
                date_breaks = "3 months",
                date_labels = "%b %Y") +
   labs(x = "", y = "") +
-  # apply colors and party names
+  # apply colors and approval state names
   scale_color_manual(
     name = "",
-    values = setNames(partycolors, partynames),
-    breaks = partynames,
-    labels = partynames
+    values = setNames(approvalcolors, approvalstates),
+    breaks = approvalstates,
+    labels = approvalstates
   ) +
   # legend appearance
   theme(
@@ -133,12 +134,12 @@ graph <- graph +
 graph
 
 ggsave(
-       file = "polls.svg",
+       file = "carney government approval polls.csv",
        plot = graph,
        width = graph_width,
        height = graph_height)
 
 # workaround since svglite doesn"t properly work in Wikipedia
-aaa <- readLines("polls.svg", -1)
+aaa <- readLines("carney government approval polls.csv", -1)
 bbb <- gsub(".svglite ", "", aaa)
-writeLines(bbb, "polls.svg")
+writeLines(bbb, "carney government approval polls.csv")

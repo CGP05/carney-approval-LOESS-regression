@@ -1,4 +1,4 @@
-﻿Polling firm,Last date of polling,Approve,Disapprove,Unsure/neither,Margin of error,Sample size,Polling method,Net approval
+﻿Polling_firm,Last_date_of_polling,Approve,Disapprove,Unsure/neither,Margin_of_error,Sample_size,Polling_method,Net_approval
 Abacus Data,20-May-26,59%,27%,14%,±2.23 pp,"1,920",Online,32%
 Abacus Data,05-May-26,57%,28%,15%,±2.0 pp,"2,478",Online,29%
 Léger,26-Apr-26,57%,35%,8%,±2.51 pp,"1,521",Online,22%

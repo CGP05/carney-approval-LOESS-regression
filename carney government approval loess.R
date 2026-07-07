@@ -32,7 +32,7 @@ polls <- read.table(
                     sep = ",",
                     fileEncoding = "UTF-8",
                     stringsAsFactors = FALSE)
-polls$polldate <- as.Date(anydate(polls$polldate))
+polls$Last date of polling <- as.Date(anydate(polls$polldate))
 
 # retrieve the 3 approval states from CSV
 approvalstates <- colnames(polls)[2:ncol(polls)]

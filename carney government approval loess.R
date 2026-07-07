@@ -134,12 +134,12 @@ graph <- graph +
 graph
 
 ggsave(
-       file = "carney government approval polls.csv",
+       file = "carney government approval polls.svg",
        plot = graph,
        width = graph_width,
        height = graph_height)
 
 # workaround since svglite doesn"t properly work in Wikipedia
-aaa <- readLines("carney government approval polls.csv", -1)
+aaa <- readLines("carney government approval polls.svg", -1)
 bbb <- gsub(".svglite ", "", aaa)
-writeLines(bbb, "carney government approval polls.csv")
+writeLines(bbb, "carney government approval polls.svg")

@@ -18,7 +18,7 @@ enddate <- "2026-07-01"     # (latest) date of lastest poll in table
 # this parameter must be decreased when the number of polls increases
 approvalspansize <- c(0.25, 0.25, 0.25)
 
-transp < - "55"              # transparency level of points
+transp <- "55"              # transparency level of points
 nnum <- 500                 # number of points used for trendline (resolution)
 limits <- c(1, 40)          # percentage limits of figure
 graph_width <- 18           # image width

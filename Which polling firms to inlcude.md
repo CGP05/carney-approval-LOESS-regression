@@ -4,7 +4,7 @@ Polls that are included are both PM Carney's personal approval and government ap
 
 Also, I should do a hypothesis test at 5% significance level if there actually is a difference between government approval and PM Carney's personal approval.
 
-There are currently 47 polls in the CSV, I will try to see if I can add more.
+There are currently 47 polls in the CSV, I will try to see if I can add more (wrote "done" in the chart below for the pollters that I checked to make sure that I included all combatible polls).
 
 | Included already: | To include: | Do not include: |
 | --- | --- | --- |
@@ -12,4 +12,4 @@ There are currently 47 polls in the CSV, I will try to see if I can add more.
 | Innovative Research | Ekos | Mainstreet Research |
 | Spark Inights | Research Co. | Pallas Data |
 | Léger | Angus Reid | Kolosowski Strategies |
-| Ipsos | - | Pollera |
+| Ipsos (done) | - | Pollera |

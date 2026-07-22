@@ -1,4 +1,4 @@
-This is a [local regression](https://en.wikipedia.org/wiki/Local_regression) graph for the Wikipedia page ["Opinion polling for the 46th Canadian federal election", specifically the section "Government approval"](https://en.wikipedia.org/wiki/Opinion_polling_for_the_46th_Canadian_federal_election#Government_approval_polls).
+This is a non-parametric [local regression](https://en.wikipedia.org/wiki/Local_regression) graph for the Wikipedia page ["Opinion polling for the 46th Canadian federal election", specifically the section "Government approval"](https://en.wikipedia.org/wiki/Opinion_polling_for_the_46th_Canadian_federal_election#Government_approval_polls).
 
 Based off of [this person's](https://en.wikipedia.org/wiki/User:Gbuvn) [code on GitLab](https://gitlab.com/gbuvn1/opinion-polling-graph), which was used for LOESS regressions of election polls (from polling firms such Abacus Data, Léger, and Ipsos) on Wikipedia, such as [this one](https://commons.wikimedia.org/wiki/File:Opinion_polling_graph_for_the_next_United_Kingdom_general_election_(post-2024).svg).
 

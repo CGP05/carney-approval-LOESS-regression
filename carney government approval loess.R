@@ -26,6 +26,7 @@ graph_height <- 8           # image height
 
 
 ### ---------- Plotting code ----------
+#add Liaison Strategies and Angus Reid polls to the csv
 polls <- read.table(
                     "carney government approval polls.csv",
                     header = TRUE,

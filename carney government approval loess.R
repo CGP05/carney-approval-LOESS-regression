@@ -33,12 +33,19 @@ polls <- read.table(
                     sep = ",",
                     fileEncoding = "UTF-8",
                     stringsAsFactors = FALSE)
-polls$Last_date_of_polling <- as.Date(anydate(polls$Last_date_of_polling))
+
+# Parse 2-digit years correctly (e.g., '22-Jun-26')
+polls$Last_date_of_polling <- as.Date(anydate(polls$Last_date_of_polling), format = "%d-%b-%y") # nolint: line_length_linter.
 
 # retrieve the 3 approval states from the CSV
 approvalstates <- colnames(polls)[3:5]
 # remove potential leading/trailing spaces so names match exactly
 approvalstates <- trimws(approvalstates)
+
+# Clean out '%' signs and convert values to numbers
+polls[approvalstates] <- lapply(polls[approvalstates], function(x) {
+  as.numeric(gsub("%", "", x))
+})
 
 # safety check: same number of approval states and colors
 if (length(approvalcolors) != length(approvalstates)) {

@@ -35,7 +35,7 @@ polls <- read.table(
                     stringsAsFactors = FALSE)
 
 # Parse 2-digit years correctly (e.g., '22-Jun-26')
-polls$Last_date_of_polling <- as.Date(anydate(polls$Last_date_of_polling), format = "%d-%b-%y") # nolint: line_length_linter.
+polls$Last_date_of_polling <- as.Date(polls$Last_date_of_polling, format = "%d-%b-%y") # nolint: line_length_linter.
 
 # retrieve the 3 approval states from the CSV
 approvalstates <- colnames(polls)[3:5]

@@ -35,8 +35,8 @@ polls <- read.table(
                     stringsAsFactors = FALSE)
 polls$Last_date_of_polling <- as.Date(anydate(polls$Last_date_of_polling))
 
-# retrieve the 3 approval states from CSV
-approvalstates <- colnames(polls)[2:ncol(polls)]
+# retrieve the 3 approval states from the CSV
+approvalstates <- colnames(polls)[3:5]
 # remove potential leading/trailing spaces so names match exactly
 approvalstates <- trimws(approvalstates)
 

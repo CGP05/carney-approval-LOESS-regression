@@ -1,9 +1,7 @@
 Sys.setlocale("LC_TIME", "English")
 library(ggplot2)
-library(anytime)
 library(tidyverse)
 library(svglite)
-library(Rcpp)
 
 ### ---------- Parameters ----------
 # Election system parameters

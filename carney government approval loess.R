@@ -49,7 +49,7 @@ if (length(approvalcolors) != length(approvalstates)) {
 polls_long <- polls |>
   pivot_longer(
     cols = all_of(approvalstates),
-    names_to = "approval state",
+    names_to = "approval",
     values_to = "value"
   )
 
@@ -61,28 +61,23 @@ graph <- ggplot() +
   geom_vline(
              xintercept = as.Date(startdate),
              color = "#aaaaaabb") + #last election)
-  #geom_vline(xintercept = as.Date(enddate), color="#aaaaaabb") +
-  geom_segment(aes(x = as.Date(startdate),
-                   xend = as.Date(enddate), y = threshold, yend = threshold),
-               color = "#666666bb",
-               linetype = "dashed")
 
-# add poll points per approval state
-for (i in seq_along(approvalstates)) {
-  pdata <- subset(polls_long, approval == approvalstates[i])
-  graph <- graph + geom_point(
-    data = pdata,
-    aes(x = polldate, y = value),
-    size = ifelse(
-                  pdata$polldate == as.Date(startdate) |
-                    pdata$polldate == as.Date(enddate), 3, 1.5),
-    shape = ifelse(
-                   pdata$polldate == as.Date(startdate) |
-                     pdata$polldate == as.Date(enddate), 23, 21),
-    color = paste0(approvalcolors[i], transp),
-    fill = paste0(approvalcolors[i], transp)
-  )
-}
+  # add poll points per approval state
+  for (i in seq_along(approvalstates)) {
+    pdata <- subset(polls_long, approval == approvalstates[i])
+    graph <- graph + geom_point(
+      data = pdata,
+      aes(x = polldate, y = value),
+      size = ifelse(
+                    pdata$polldate == as.Date(startdate) |
+                      pdata$polldate == as.Date(enddate), 3, 1.5),
+      shape = ifelse(
+                     pdata$polldate == as.Date(startdate) |
+                       pdata$polldate == as.Date(enddate), 23, 21),
+      color = paste0(approvalcolors[i], transp),
+      fill = paste0(approvalcolors[i], transp)
+    )
+  }
 
 # add trend lines per approval state
 for (i in seq_along(approvalstates)) {

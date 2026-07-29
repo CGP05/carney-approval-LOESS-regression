@@ -62,11 +62,10 @@ graph <- ggplot() +
              xintercept = as.Date(startdate),
              color = "#aaaaaabb") + #last election)
   #geom_vline(xintercept = as.Date(enddate), color="#aaaaaabb") +
-  # vertical line (next election), comment out if unknown yet
   geom_segment(aes(x = as.Date(startdate),
                    xend = as.Date(enddate), y = threshold, yend = threshold),
                color = "#666666bb",
-               linetype = "dashed")# horizontal line (election threshold 5%)
+               linetype = "dashed")
 
 # add poll points per approval state
 for (i in seq_along(approvalstates)) {
@@ -140,7 +139,7 @@ ggsave(
        width = graph_width,
        height = graph_height)
 
-# workaround since svglite doesn"t properly work in Wikipedia
+# workaround since svglite does not properly work in Wikipedia
 aaa <- readLines("carney government approval polls.svg", -1)
 bbb <- gsub(".svglite ", "", aaa)
 writeLines(bbb, "carney government approval polls.svg")

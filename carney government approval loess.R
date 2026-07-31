@@ -67,24 +67,24 @@ polls_long$approval <- factor(polls_long$approval, levels = approvalstates)
 graph <- ggplot() +
   geom_vline(
              xintercept = as.Date(startdate),
-             color = "#aaaaaabb") + #last election)
+             color = "#aaaaaabb")
 
 # add poll points per approval state # nolint
 for (i in seq_along(approvalstates)) {
-    pdata <- subset(polls_long, approval == approvalstates[i])
-    graph <- graph + geom_point(
-      data = pdata,
-      aes(x = Last_date_of_polling, y = value),
-      size = ifelse(
-                    pdata$Last_date_of_polling == as.Date(startdate) |
-                      pdata$Last_date_of_polling == as.Date(enddate), 3, 1.5),
-      shape = ifelse(
-                     pdata$Last_date_of_polling == as.Date(startdate) |
-                       pdata$Last_date_of_polling == as.Date(enddate), 23, 21),
-      color = paste0(approvalcolors[i], transp),
-      fill = paste0(approvalcolors[i], transp)
-    )
-  }
+  pdata <- subset(polls_long, approval == approvalstates[i])
+  graph <- graph + geom_point(
+    data = pdata,
+    aes(x = Last_date_of_polling, y = value),
+    size = ifelse(
+                  pdata$Last_date_of_polling == as.Date(startdate) |
+                    pdata$Last_date_of_polling == as.Date(enddate), 3, 1.5),
+    shape = ifelse(
+                   pdata$Last_date_of_polling == as.Date(startdate) |
+                     pdata$Last_date_of_polling == as.Date(enddate), 23, 21),
+    color = paste0(approvalcolors[i], transp),
+    fill = paste0(approvalcolors[i], transp)
+  )
+}
 
 # add trend lines per approval state
 for (i in seq_along(approvalstates)) {
@@ -105,13 +105,13 @@ graph <- graph +
   # y-axis: add % and custom limits
   scale_y_continuous(
                      labels = function(x) paste0(x, "%"),
-                     coord_cartesian(ylim = limits)) +
-  # x-axis: 1 month grid, labels every 3 months
-  scale_x_date(
-               limits = as.Date(c(startdate, enddate)),
-               date_minor_breaks = "1 months",
-               date_breaks = "3 months",
-               date_labels = "%b %Y") +
+                     coord_cartesian(ylim = limits))
+# x-axis: 1 month grid, labels every 3 months
+scale_x_date(
+             limits = as.Date(c(startdate, enddate)),
+             date_minor_breaks = "1 months",
+             date_breaks = "3 months",
+             date_labels = "%b %Y") +
   labs(x = "", y = "") +
   # apply colors and approval state names
   scale_color_manual(

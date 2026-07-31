@@ -96,7 +96,8 @@ for (i in seq_along(approvalstates)) {
     method = "loess",
     span = approvalspansize[i],
     n = nnum,
-    se = FALSE
+    se = FALSE,
+    na.rm = TRUE
   )
 }
 

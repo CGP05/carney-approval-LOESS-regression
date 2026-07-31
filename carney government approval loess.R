@@ -40,9 +40,11 @@ approvalstates <- colnames(polls)[3:5]
 # remove potential leading/trailing spaces so names match exactly
 approvalstates <- trimws(approvalstates)
 
-# Clean out '%' signs and convert values to numbers
+# Clean out '%' signs and the '—N/a' and convert values to numbers
 polls[approvalstates] <- lapply(polls[approvalstates], function(x) {
-  as.numeric(gsub("%", "", x))
+  x <- gsub("%", "", x)
+  x <- gsub("—N/a|N/a|—", NA, x)   # <-- add this line
+  as.numeric(x)
 })
 
 # safety check: same number of approval states and colors
@@ -67,8 +69,8 @@ graph <- ggplot() +
              xintercept = as.Date(startdate),
              color = "#aaaaaabb") + #last election)
 
-  # add poll points per approval state
-  for (i in seq_along(approvalstates)) {
+# add poll points per approval state # nolint
+for (i in seq_along(approvalstates)) {
     pdata <- subset(polls_long, approval == approvalstates[i])
     graph <- graph + geom_point(
       data = pdata,
@@ -103,7 +105,7 @@ graph <- graph +
   # y-axis: add % and custom limits
   scale_y_continuous(
                      labels = function(x) paste0(x, "%"),
-                     limits = limits) +
+                     coord_cartesian(ylim = limits)) +
   # x-axis: 1 month grid, labels every 3 months
   scale_x_date(
                limits = as.Date(c(startdate, enddate)),

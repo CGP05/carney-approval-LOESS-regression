@@ -9,7 +9,7 @@ library(svglite)
 approvalcolors <- c("#2ca02c", "#d62728", "#7f7f7f")
 
 startdate <- "2025-03-14"   # date Carney was sworn in as Prime Minister
-enddate <- "2026-07-01"     # (latest) date of lastest poll in table
+enddate <- "2026-07-01"     # (latest) date of latest poll in table
 
 # Figure parameters
 # individual smoothing parameter for the trend line of the 3 approval states

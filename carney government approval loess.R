@@ -106,13 +106,13 @@ graph <- graph +
   # y-axis: add % and custom limits
   scale_y_continuous(
                      labels = function(x) paste0(x, "%"),
-                     coord_cartesian(ylim = limits))
-# x-axis: 1 month grid, labels every 3 months
-scale_x_date(
-             limits = as.Date(c(startdate, enddate)),
-             date_minor_breaks = "1 months",
-             date_breaks = "3 months",
-             date_labels = "%b %Y") +
+                     limits = limits) +
+  # x-axis: 1 month grid, labels every 3 months
+  scale_x_date(
+               limits = as.Date(c(startdate, enddate)),
+               date_minor_breaks = "1 months",
+               date_breaks = "3 months",
+               date_labels = "%b %Y") +
   labs(x = "", y = "") +
   # apply colors and approval state names
   scale_color_manual(
@@ -146,3 +146,4 @@ ggsave(
 aaa <- readLines("carney government approval polls.svg", -1)
 bbb <- gsub(".svglite ", "", aaa)
 writeLines(bbb, "carney government approval polls.svg")
+

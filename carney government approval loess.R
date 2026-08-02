@@ -146,4 +146,3 @@ ggsave(
 aaa <- readLines("carney government approval polls.svg", -1)
 bbb <- gsub(".svglite ", "", aaa)
 writeLines(bbb, "carney government approval polls.svg")
-

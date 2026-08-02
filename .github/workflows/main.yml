@@ -3,6 +3,9 @@ name: Render LOESS graph automatically efter each commit
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'carney government approval polls.csv'
+      - 'carney government approval loess.R'
   workflow_dispatch:
 
 permissions:

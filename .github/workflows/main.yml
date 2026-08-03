@@ -34,6 +34,14 @@ jobs:
           install.packages(c("ggplot2", "tidyverse", "svglite"))
         shell: Rscript {0}
 
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install pandas requests beautifulsoup4 lxml
+
+      - name: Fetch latest Wikipedia approval polls
+        run: |
+          python3 update_polls.py
+
       - name: Run R Script
         run: |
           source("carney government approval loess.R")
@@ -43,6 +51,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add "carney government approval polls.svg"
-          git diff-index --quiet HEAD || git commit -m "Auto-render updated SVG plot"
+          git add "carney government approval polls.csv" "carney government approval polls.svg"
+          git diff-index --quiet HEAD || git commit -m "Auto-render updated data and SVG plot"
           git push

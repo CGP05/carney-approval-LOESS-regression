@@ -6,7 +6,7 @@ This is a non-parametric [local regression](https://en.wikipedia.org/wiki/Local_
 
 
 ## Acknowledgements
-Based off of [this person's](https://en.wikipedia.org/wiki/User:Gbuvn) [code on GitLab](https://gitlab.com/gbuvn1/opinion-polling-graph), which was used for LOESS regressions of election polls (from polling firms such Abacus Data, Léger, and Ipsos) on Wikipedia, such as [this one](https://commons.wikimedia.org/wiki/File:Opinion_polling_graph_for_the_next_United_Kingdom_general_election_(post-2024).svg).
+Based off of [this person's](https://en.wikipedia.org/wiki/User:Gbuvn) [code on GitLab](https://gitlab.com/gbuvn1/opinion-polling-graph), which was used for LOESS regressions of election polls (from polling firms such as Abacus Data, Léger, and Ipsos) on Wikipedia, such as [this one](https://commons.wikimedia.org/wiki/File:Opinion_polling_graph_for_the_next_United_Kingdom_general_election_(post-2024).svg).
 
 The previous graph (as seen below) was made by Wikipedia user ST2407 but stopped being updated for a long time and was [removed by them](https://en.wikipedia.org/w/index.php?title=Opinion_polling_for_the_46th_Canadian_federal_election&diff=prev&oldid=1360141768) from Wikipedia.
 

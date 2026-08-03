@@ -34,14 +34,6 @@ jobs:
           install.packages(c("ggplot2", "tidyverse", "svglite"))
         shell: Rscript {0}
 
-      - name: Install Python dependencies
-        run: |
-          python3 -m pip install pandas requests beautifulsoup4 lxml
-
-      - name: Fetch latest Wikipedia approval polls
-        run: |
-          python3 update_polls.py
-
       - name: Run R Script
         run: |
           source("carney government approval loess.R")

@@ -2,7 +2,8 @@
 This is a non-parametric [local regression](https://en.wikipedia.org/wiki/Local_regression) graph for the Wikipedia page ["Opinion polling for the 46th Canadian federal election", specifically the section "Government approval"](https://en.wikipedia.org/wiki/Opinion_polling_for_the_46th_Canadian_federal_election#Government_approval_polls).
 
 **Current version:**
-<img width="1728" height="768" alt="image" src="https://github.com/user-attachments/assets/72cd2bc4-a7b0-4a5f-a57f-1e7465dfdb4d" />
+<img width="1728" height="768" alt="image" src="https://github.com/user-attachments/assets/9e37c3f0-d108-421d-b111-7fe6db3b1b41" />
+
 
 
 ## Acknowledgements
@@ -13,4 +14,4 @@ The previous graph (as seen below) was made by Wikipedia user ST2407 but stopped
 <img width="1208" height="748" alt="current graph" src="https://github.com/user-attachments/assets/9fae70fc-e1e4-4364-941f-d509792582c1" />
 
 ## Maintenance Plan
-I likely need to expand the data table in Wikipedia with more polls, and will try to remain dedicated to running new regressions when new polls are released.
+I will remain dedicated to running updating the Wikipedia table and CSV as well as new regressions when new polls are released.

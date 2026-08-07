@@ -8,8 +8,9 @@ There are currently 47 polls in the CSV, I will try to see if I can add more (wr
 
 | Included already: | To include: | Do not include: |
 | --- | --- | --- |
-| Abacus Data | Liaison Strategies | Nanos Research |
-| Innovative Research | Ekos | Mainstreet Research |
-| Spark Inights | Research Co. | Pallas Data |
-| Léger | Angus Reid | Kolosowski Strategies |
+| Abacus Data | Ekos | Nanos Research |
+| Innovative Research | Research Co. | Mainstreet Research |
+| Spark Inights | Angus Reid | Pallas Data |
+| Léger | - | Kolosowski Strategies |
 | Ipsos (done) | - | Pollera |
+Liaison Strategies (someone added 38 of them on one day!) | - | - |

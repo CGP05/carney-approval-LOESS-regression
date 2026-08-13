@@ -5,11 +5,11 @@ library(svglite)
 
 ### ---------- Parameters ----------
 # Election system parameters
-# Approve = Green, Disapprove = Red, Unsure = Grey
-approvalcolors <- c("#2ca02c", "#d62728", "#7f7f7f")
+# Approve = Green, Disapprove = Red
+approvalcolors <- c("#2ca02c", "#d62728")
 
-startdate <- "2025-03-14"   # date Carney was sworn in as Prime Minister
-enddate <- "2026-07-01"     # (latest) date of latest poll in table
+startdate <- "2025-05-14"   # 
+enddate <- "2026-07-01"     # date of latest poll in table
 
 # Figure parameters
 # individual smoothing parameter for the trend line of the 3 approval states
@@ -34,7 +34,7 @@ polls <- read_csv(
 polls$Last_date_of_polling <- as.Date(polls$Last_date_of_polling, format = "%d-%b-%y") # nolint: line_length_linter.
 
 # retrieve the 3 approval states from the CSV
-approvalstates <- colnames(polls)[3:5]
+approvalstates <- colnames(polls)[3:4]
 # remove potential leading/trailing spaces so names match exactly
 approvalstates <- trimws(approvalstates)
 

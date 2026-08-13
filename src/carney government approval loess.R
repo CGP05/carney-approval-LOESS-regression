@@ -25,12 +25,10 @@ graph_height <- 8           # image height
 
 ### ---------- Plotting code ----------
 #add Liaison Strategies and Angus Reid polls to the csv
-polls <- read.table(
-                    "carney government approval polls.csv",
-                    header = TRUE,
-                    sep = ",",
-                    fileEncoding = "UTF-8",
-                    stringsAsFactors = FALSE)
+polls <- read_csv(
+                  "carney government approval polls.csv",
+                  na = c("", "NA", "N/a", "—N/a", "—"),
+                  locale = locale(encoding = "UTF-8"))
 
 # Parse 2-digit years correctly (e.g., '22-Jun-26')
 polls$Last_date_of_polling <- as.Date(polls$Last_date_of_polling, format = "%d-%b-%y") # nolint: line_length_linter.
@@ -40,12 +38,8 @@ approvalstates <- colnames(polls)[3:5]
 # remove potential leading/trailing spaces so names match exactly
 approvalstates <- trimws(approvalstates)
 
-# Clean out '%' signs and the '—N/a' and convert values to numbers
-polls[approvalstates] <- lapply(polls[approvalstates], function(x) {
-  x <- gsub("%", "", x)
-  x <- gsub("—N/a|N/a|—", NA, x)   # <-- add this line
-  as.numeric(x)
-})
+# Strip '%' signs and convert values to numbers (NA tokens handled by read_csv)
+polls[approvalstates] <- lapply(polls[approvalstates], parse_number)
 
 # safety check: same number of approval states and colors
 if (length(approvalcolors) != length(approvalstates)) {

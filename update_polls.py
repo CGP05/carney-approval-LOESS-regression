@@ -89,7 +89,7 @@ def parse_table(table):
 
 
 def coerce_date(series):
-    result = pd.to_datetime(series, dayfirst=True, errors="coerce", infer_datetime_format=True)
+    result = pd.to_datetime(series, dayfirst=True, errors="coerce", format="mixed")
     if result.isna().any():
         bad = series[result.isna()].tolist()
         raise ValueError(f"Unable to parse these dates: {bad}")

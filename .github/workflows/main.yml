@@ -4,8 +4,8 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - '/src/carney government approval polls.csv'
-      - '/src/carney government approval loess.R'
+      - 'carney government approval polls.csv'
+      - 'carney government approval loess.R'
   workflow_dispatch:
 
 permissions:

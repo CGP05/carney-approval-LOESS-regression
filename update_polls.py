@@ -1,121 +1,203 @@
 #!/usr/bin/env python3
-#this script was entirely made by Gemeni and it does not work at all, but i will probably use it as a reference to make one that does function
-"""Fetch the Government approval polls data from Wikipedia and save it as a local CSV."""
+"""Fetch new Carney government approval polls from Wikipedia and append them to the local CSV.
+
+Rather than scraping rendered HTML (which buries the numbers in citation
+templates, sort keys, and colour-shading markup), this pulls the raw wikitext
+of the "Table of polls" subsection under "Government approval polls" via the
+MediaWiki API and parses the wiki-table syntax directly. New rows are merged
+into the existing CSV (deduped on firm + date) and written back in the same
+newest-first order and formatting the CSV already uses.
+"""
 import re
 from pathlib import Path
 
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup
 
-WIKI_URL = "https://en.wikipedia.org/wiki/Opinion_polling_for_the_46th_Canadian_federal_election"
+API_URL = "https://en.wikipedia.org/w/api.php"
+PAGE_TITLE = "Opinion polling for the 46th Canadian federal election"
 CSV_PATH = Path("carney government approval polls.csv")
-TARGET_COLUMNS = {
-    "Polling firm": "Polling_firm",
-    "Last date of polling": "Last_date_of_polling",
-    "Approve": "Approve",
-    "Disapprove": "Disapprove",
-    "Unsure/neither": "Unsure/neither",
-    "Margin of error": "Margin_of_error",
-    "Sample size": "Sample_size",
-    "Polling method": "Polling_method",
-    "Net approval": "Net_approval",
+CSV_COLUMNS = [
+    "Polling_firm",
+    "Last_date_of_polling",
+    "Approve",
+    "Disapprove",
+    "Unsure/neither",
+    "Margin_of_error",
+    "Sample_size",
+    "Polling_method",
+    "Net_approval",
+]
+
+# Firms to exclude even if they show up in the table (they poll Carney/PM
+# favourability or something else rather than government/PM approval).
+# See "Which polling firms to inlcude.md".
+EXCLUDED_FIRMS = {
+    "Nanos Research",
+    "Mainstreet Research",
+    "Pallas Data",
+    "Kolosowski Strategies",
+    "Pollera",
 }
 
+HEADERS = {"User-Agent": "carney-approval-wiki-scraper/2.0 (personal project)"}
 
-def normalize_header(text):
-    text = str(text)
-    text = re.sub(r"\[.*?\]", "", text)
-    text = text.replace("\u00A0", " ")
-    text = text.strip()
-    return re.sub(r"\s+", " ", text)
+
+def api_get(params):
+    params = {**params, "format": "json"}
+    response = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
+    response.raise_for_status()
+    return response.json()
+
+
+def find_table_of_polls_section():
+    """Locate the 'Table of polls' section nested under 'Government approval polls'."""
+    data = api_get({"action": "parse", "page": PAGE_TITLE, "prop": "sections"})
+    sections = data["parse"]["sections"]
+
+    in_government_approval = False
+    for section in sections:
+        if section["line"] == "Government approval polls" and section["toclevel"] == 1:
+            in_government_approval = True
+            continue
+        if in_government_approval and section["toclevel"] == 1:
+            # Reached the next top-level section without finding our table.
+            break
+        if in_government_approval and section["line"] == "Table of polls":
+            return section["index"]
+
+    raise RuntimeError("Could not find the 'Table of polls' section under Government approval polls.")
+
+
+def fetch_table_wikitext():
+    section_index = find_table_of_polls_section()
+    data = api_get(
+        {
+            "action": "parse",
+            "page": PAGE_TITLE,
+            "prop": "wikitext",
+            "section": section_index,
+        }
+    )
+    return data["parse"]["wikitext"]["*"]
+
+
+def strip_wikilinks(text):
+    # [[Target|Label]] -> Label, [[Target]] -> Target
+    text = re.sub(r"\[\[[^\]|]*\|([^\]]*)\]\]", r"\1", text)
+    text = re.sub(r"\[\[([^\]]*)\]\]", r"\1", text)
+    return text
 
 
 def clean_cell(text):
-    if text is None:
+    text = strip_wikilinks(text)
+    text = re.sub(r"<ref[^>]*/?>.*?</ref>|<ref[^>]*/>", "", text, flags=re.DOTALL)
+    text = re.sub(r"style\s*=\s*\"[^\"]*\"\s*\|", "", text)
+    text = text.replace("'''", "")
+    text = re.sub(r"\{\{white\|(.*?)\}\}", r"\1", text)
+    text = re.sub(r"\{\{nowrap\|(.*?)\}\}", r"\1", text)
+    text = text.replace("\u00A0", " ")
+    text = text.strip()
+    return text
+
+
+def parse_date(cell):
+    match = re.search(r"\{\{dts\|([^}]+)\}\}", cell)
+    if not match:
         return None
-    value = str(text)
-    value = re.sub(r"\[.*?\]", "", value)
-    value = value.replace("\u00A0", " ")
-    value = value.strip()
-    value = re.sub(r"\s+", " ", value)
-    return value or None
+    raw_date = match.group(1).strip()
+    return pd.to_datetime(raw_date, format="%B %d, %Y")
 
 
-def find_approval_table(soup):
-    heading = soup.find(id="Government_approval_polls")
-    if heading:
-        section = heading.find_parent(["h2", "h3"])
-        if section:
-            table = section.find_next("table")
-            if table is not None:
-                return table
-
-    for table in soup.find_all("table", class_="wikitable"):
-        header_cells = [normalize_header(th.get_text(" ", strip=True)) for th in table.find_all("th")]
-        if {"Polling firm", "Approve", "Disapprove"}.issubset(set(header_cells)):
-            return table
-
-    raise RuntimeError("Could not find the Government approval polls table on Wikipedia.")
+def parse_percent(cell):
+    cell = clean_cell(cell)
+    if "N/A" in cell or cell in ("", "-", "\u2014"):
+        return "\u2014N/a"
+    match = re.search(r"[+-]?\d+(?:\.\d+)?%", cell)
+    return match.group(0) if match else cell
 
 
-def parse_table(table):
+def parse_margin_of_error(cell):
+    cell = clean_cell(cell)
+    if "N/A" in cell or cell in ("", "-", "\u2014"):
+        return "\u2014N/a"
+    return re.sub(r"\s+", " ", cell)
+
+
+def parse_row(row_text):
+    cells = row_text.split("||")
+    if len(cells) < 10:
+        return None
+
+    firm = clean_cell(cells[0].strip().lstrip("|").strip())
+    date = parse_date(cells[1])
+    if date is None:
+        return None
+
+    approve = parse_percent(cells[3])
+    disapprove = parse_percent(cells[4])
+    unsure = parse_percent(cells[5])
+    moe = parse_margin_of_error(cells[6])
+    sample_size = clean_cell(cells[7])
+    method = clean_cell(cells[8])
+    net_approval = parse_percent(cells[9]).lstrip("+")
+
+    return {
+        "Polling_firm": firm,
+        "Last_date_of_polling": date,
+        "Approve": approve,
+        "Disapprove": disapprove,
+        "Unsure/neither": unsure,
+        "Margin_of_error": moe,
+        "Sample_size": sample_size,
+        "Polling_method": method,
+        "Net_approval": net_approval,
+    }
+
+
+def parse_wikitext_table(wikitext):
     rows = []
-    header = None
-    for tr in table.find_all("tr"):
-        cells = [clean_cell(cell.get_text(" ", strip=True)) for cell in tr.find_all(["th", "td"])]
-        if not cells:
+    for row_text in wikitext.split("\n|-"):
+        if "{{dts|" not in row_text:
             continue
+        row = parse_row(row_text)
+        if row is not None:
+            rows.append(row)
 
-        if header is None and tr.find_all("th"):
-            normalized = [normalize_header(cell) for cell in cells]
-            while normalized and normalized[-1] == "":
-                normalized.pop()
-            header = normalized
-            continue
+    if not rows:
+        raise RuntimeError("Parsed zero rows from the Government approval polls wikitext table.")
 
-        if header is None:
-            continue
-
-        if len(cells) < len(header):
-            continue
-
-        rows.append(cells[: len(header)])
-
-    if header is None or not rows:
-        raise RuntimeError("Could not parse rows from the approval polls table.")
-
-    return pd.DataFrame(rows, columns=header)
-
-
-def coerce_date(series):
-    result = pd.to_datetime(series, dayfirst=True, errors="coerce", format="mixed")
-    if result.isna().any():
-        bad = series[result.isna()].tolist()
-        raise ValueError(f"Unable to parse these dates: {bad}")
-    return result.dt.strftime("%d-%b-%y")
+    return pd.DataFrame(rows, columns=CSV_COLUMNS)
 
 
 def main():
-    response = requests.get(WIKI_URL, headers={"User-Agent": "carney-approval-wiki-scraper/1.0"}, timeout=30)
-    response.raise_for_status()
+    wikitext = fetch_table_wikitext()
+    scraped = parse_wikitext_table(wikitext)
 
-    soup = BeautifulSoup(response.text, "lxml")
-    table = find_approval_table(soup)
-    df = parse_table(table)
+    excluded = scraped[scraped["Polling_firm"].isin(EXCLUDED_FIRMS)]
+    if not excluded.empty:
+        print(f"Skipping {len(excluded)} row(s) from excluded firms: {sorted(excluded['Polling_firm'].unique())}")
+    scraped = scraped[~scraped["Polling_firm"].isin(EXCLUDED_FIRMS)].copy()
 
-    rename_map = {col: TARGET_COLUMNS[col] for col in df.columns if normalize_header(col) in TARGET_COLUMNS}
-    df = df.rename(columns={col: TARGET_COLUMNS[normalize_header(col)] for col in df.columns if normalize_header(col) in TARGET_COLUMNS})
+    existing = pd.read_csv(CSV_PATH)
+    existing["Last_date_of_polling"] = pd.to_datetime(existing["Last_date_of_polling"], format="%d-%b-%y")
 
-    missing = set(TARGET_COLUMNS.values()) - set(df.columns)
-    if missing:
-        raise RuntimeError(f"Missing required columns after normalization: {missing}")
+    existing_keys = set(zip(existing["Polling_firm"], existing["Last_date_of_polling"]))
+    scraped["_key"] = list(zip(scraped["Polling_firm"], scraped["Last_date_of_polling"]))
+    new_rows = scraped[~scraped["_key"].isin(existing_keys)].drop(columns="_key")
 
-    df = df[list(TARGET_COLUMNS.values())]
-    df["Last_date_of_polling"] = coerce_date(df["Last_date_of_polling"])
-    df["Sample_size"] = df["Sample_size"].astype(str).str.replace(r"\.0$", "", regex=True)
-    df.to_csv(CSV_PATH, index=False, encoding="utf-8")
-    print(f"Wrote {len(df)} rows to {CSV_PATH}")
+    if new_rows.empty:
+        print("No new polls found; CSV is already up to date.")
+        return
+
+    combined = pd.concat([existing, new_rows], ignore_index=True)
+    combined = combined.sort_values("Last_date_of_polling", ascending=False)
+    combined["Last_date_of_polling"] = combined["Last_date_of_polling"].dt.strftime("%d-%b-%y")
+
+    combined.to_csv(CSV_PATH, index=False, encoding="utf-8")
+    print(f"Added {len(new_rows)} new poll(s):")
+    for _, row in new_rows.sort_values("Last_date_of_polling", ascending=False).iterrows():
+        print(f"  {row['Polling_firm']} ({row['Last_date_of_polling'].strftime('%d-%b-%y')})")
 
 
 if __name__ == "__main__":

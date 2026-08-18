@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   update-polls:
@@ -69,3 +70,12 @@ jobs:
           git add "carney government approval polls.csv" "carney government approval polls.svg"
           git commit -m "Auto-update poll data and SVG plot"
           git push
+
+      - name: Open issue notifying about new polls
+        if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "New approval poll(s) added on $(date -u +%Y-%m-%d)" \
+            --body-file new_polls.txt

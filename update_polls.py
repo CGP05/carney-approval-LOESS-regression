@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#by Claude Sonnet 5
 """Fetch new Carney government approval polls from Wikipedia and append them to the local CSV.
 
 Rather than scraping rendered HTML (which buries the numbers in citation
@@ -17,6 +18,7 @@ import requests
 API_URL = "https://en.wikipedia.org/w/api.php"
 PAGE_TITLE = "Opinion polling for the 46th Canadian federal election"
 CSV_PATH = Path("carney government approval polls.csv")
+NEW_POLLS_SUMMARY_PATH = Path("new_polls.txt")
 CSV_COLUMNS = [
     "Polling_firm",
     "Last_date_of_polling",
@@ -188,16 +190,30 @@ def main():
 
     if new_rows.empty:
         print("No new polls found; CSV is already up to date.")
+        NEW_POLLS_SUMMARY_PATH.write_text("", encoding="utf-8")
         return
 
     combined = pd.concat([existing, new_rows], ignore_index=True)
-    combined = combined.sort_values("Last_date_of_polling", ascending=False)
+    # Stable sort so ties on the same date keep their existing relative order
+    # (Wikipedia orders same-date polls by publication time; a quicksort
+    # would needlessly shuffle rows that are already in the right order).
+    combined = combined.sort_values("Last_date_of_polling", ascending=False, kind="mergesort")
     combined["Last_date_of_polling"] = combined["Last_date_of_polling"].dt.strftime("%d-%b-%y")
 
-    combined.to_csv(CSV_PATH, index=False, encoding="utf-8")
+    # Match the CSV's existing conventions: CRLF line endings and a UTF-8 BOM.
+    combined.to_csv(CSV_PATH, index=False, encoding="utf-8-sig", lineterminator="\r\n")
+
+    new_rows = new_rows.sort_values("Last_date_of_polling", ascending=False)
+    summary_lines = [
+        f"- **{row['Polling_firm']}** ({row['Last_date_of_polling'].strftime('%d-%b-%y')}): "
+        f"Approve {row['Approve']}, Disapprove {row['Disapprove']}, Net {row['Net_approval']}"
+        for _, row in new_rows.iterrows()
+    ]
+    NEW_POLLS_SUMMARY_PATH.write_text("\n".join(summary_lines), encoding="utf-8")
+
     print(f"Added {len(new_rows)} new poll(s):")
-    for _, row in new_rows.sort_values("Last_date_of_polling", ascending=False).iterrows():
-        print(f"  {row['Polling_firm']} ({row['Last_date_of_polling'].strftime('%d-%b-%y')})")
+    for line in summary_lines:
+        print(f"  {line}")
 
 
 if __name__ == "__main__":

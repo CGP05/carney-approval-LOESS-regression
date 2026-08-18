@@ -1,0 +1,71 @@
+name: Fetch new approval polls automatically
+
+on:
+  schedule:
+    # 13:00 UTC daily (~9am Eastern)
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-polls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python packages
+        run: pip install pandas requests
+
+      - name: Run poll scraper
+        run: python update_polls.py
+
+      - name: Check for changes
+        id: check
+        run: |
+          if git diff --quiet -- "carney government approval polls.csv"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install System Graphics Dependencies
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+
+      - name: Set up R
+        if: steps.check.outputs.changed == 'true'
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+
+      - name: Install R packages
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          install.packages(c("ggplot2", "tidyverse", "svglite"))
+        shell: Rscript {0}
+
+      - name: Render updated LOESS plot
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          source("carney government approval loess.R")
+        shell: Rscript {0}
+
+      - name: Commit and push updated data and plot
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add "carney government approval polls.csv" "carney government approval polls.svg"
+          git commit -m "Auto-update poll data and SVG plot"
+          git push

@@ -2,7 +2,7 @@
 This is a non-parametric [local regression](https://en.wikipedia.org/wiki/Local_regression) graph for the Wikipedia page ["Opinion polling for the 46th Canadian federal election", specifically the section "Government approval"](https://en.wikipedia.org/wiki/Opinion_polling_for_the_46th_Canadian_federal_election#Government_approval_polls).
 
 **Current version:**
-<img width="1728" height="768" alt="image" src="https://github.com/user-attachments/assets/9e37c3f0-d108-421d-b111-7fe6db3b1b41" />
+<img width="1728" height="768" alt="Government approval graph" src="carney government approval polls.svg" />
 
 
 

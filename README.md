@@ -14,7 +14,7 @@ The previous graph (as seen below) was made by Wikipedia user ST2407 but stopped
 <img width="1208" height="748" alt="current graph" src="https://github.com/user-attachments/assets/9fae70fc-e1e4-4364-941f-d509792582c1" />
 
 
-## Automated Updates
+## Automated CSV Updates
 [`update_polls.py`](update_polls.py) checks the Wikipedia page's "Table of polls" section daily for new government approval polls, parses the wikitext directly (rather than scraping rendered HTML), and appends any new rows to `carney government approval polls.csv`, skipping firms listed in [`Which polling firms to inlcude.md`](Which%20polling%20firms%20to%20inlcude.md). This runs via a scheduled [GitHub Actions workflow](.github/workflows/update-polls.yml), which also re-renders the LOESS plot and opens a GitHub issue summarizing any new polls when the CSV changes.
 I will also try to update the original Wikipedia table with new polls.
 A future project could be to scrape new polls directly from the pollters websites.

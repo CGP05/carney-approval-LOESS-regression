@@ -1,4 +1,5 @@
-Polling_firm,Last_date_of_polling,Approve,Disapprove,Unsure/neither,Margin_of_error,Sample_size,Polling_method,Net_approval
+﻿Polling_firm,Last_date_of_polling,Approve,Disapprove,Unsure/neither,Margin_of_error,Sample_size,Polling_method,Net_approval
+Abacus Data,26-Aug-26,56%,29%,15%,±2.2 pp,"2,022",Online,27%
 Liaison Strategies,15-Aug-26,60%,31%,9%,±2.5 pp,"1,526",IVR,29%
 Abacus Data,12-Aug-26,52%,31%,17%,±2.5 pp,"1,499",Online,21%
 Liaison Strategies,08-Aug-26,57%,33%,9%,±2.5 pp,"1,526",IVR,24%

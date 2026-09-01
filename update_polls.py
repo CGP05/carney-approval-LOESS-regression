@@ -42,7 +42,7 @@ EXCLUDED_FIRMS = {
     "Pollera",
 }
 
-HEADERS = {"User-Agent": "carney-approval-wiki-scraper/2.0 (personal project)"}
+HEADERS = {"User-Agent": "carney-approval-wikipedia-scraper (open source project)"}
 
 
 def api_get(params):

@@ -71,12 +71,8 @@ for (i in seq_along(approvalstates)) {
   graph <- graph + geom_point(
     data = pdata,
     aes(x = Last_date_of_polling, y = value),
-    size = ifelse(
-                  pdata$Last_date_of_polling == as.Date(startdate) |
-                    pdata$Last_date_of_polling == as.Date(enddate), 3, 1.5),
-    shape = ifelse(
-                   pdata$Last_date_of_polling == as.Date(startdate) |
-                     pdata$Last_date_of_polling == as.Date(enddate), 23, 21),
+    size = 1.5,
+    shape = 21,
     color = paste0(approvalcolors[i], transp),
     fill = paste0(approvalcolors[i], transp)
   )

@@ -64,7 +64,7 @@
 <polyline points='791.99,542.46 791.99,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='986.84,542.46 986.84,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
 <line x1='102.52' y1='542.46' x2='102.52' y2='5.48' style='stroke-width: 1.07; stroke: #AAAAAA; stroke-opacity: 0.73; stroke-linecap: butt;' />
-<polygon points='1113.18,141.74 1117.63,137.28 1113.18,132.83 1108.72,137.28 ' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
+<circle cx='1113.18' cy='137.28' r='1.95' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
 <circle cx='1106.75' cy='215.39' r='1.95' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
 <circle cx='1083.20' cy='176.34' r='1.95' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
 <circle cx='1076.77' cy='254.44' r='1.95' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
@@ -158,7 +158,7 @@
 <circle cx='136.78' cy='137.28' r='1.95' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
 <circle cx='119.65' cy='283.73' r='1.95' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
 <circle cx='117.51' cy='273.97' r='1.95' style='stroke-width: 0.71; stroke: #2CA02C; stroke-opacity: 0.33; fill: #2CA02C; fill-opacity: 0.33;' />
-<polygon points='1113.18,502.98 1117.63,498.52 1113.18,494.07 1108.72,498.52 ' style='stroke-width: 0.71; stroke: #D62728; stroke-opacity: 0.33; fill: #D62728; fill-opacity: 0.33;' />
+<circle cx='1113.18' cy='498.52' r='1.95' style='stroke-width: 0.71; stroke: #D62728; stroke-opacity: 0.33; fill: #D62728; fill-opacity: 0.33;' />
 <circle cx='1106.75' cy='479.00' r='1.95' style='stroke-width: 0.71; stroke: #D62728; stroke-opacity: 0.33; fill: #D62728; fill-opacity: 0.33;' />
 <circle cx='1083.20' cy='459.47' r='1.95' style='stroke-width: 0.71; stroke: #D62728; stroke-opacity: 0.33; fill: #D62728; fill-opacity: 0.33;' />
 <circle cx='1076.77' cy='459.47' r='1.95' style='stroke-width: 0.71; stroke: #D62728; stroke-opacity: 0.33; fill: #D62728; fill-opacity: 0.33;' />

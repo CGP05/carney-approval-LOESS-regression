@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 new_polls.txt
+__pycache__/
+*.pyc

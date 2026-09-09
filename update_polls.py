@@ -104,11 +104,17 @@ def clean_cell(text):
 
 
 def parse_date(cell):
+    # Usually wrapped in {{dts|...}} (a sortkey template), but newly added
+    # rows sometimes appear as a plain "Month Day, Year" string before an
+    # editor gets around to wrapping them.
     match = re.search(r"\{\{dts\|([^}]+)\}\}", cell)
-    if not match:
+    raw_date = match.group(1).strip() if match else clean_cell(cell)
+    if not raw_date:
         return None
-    raw_date = match.group(1).strip()
-    return pd.to_datetime(raw_date, format="%B %d, %Y")
+    try:
+        return pd.to_datetime(raw_date, format="%B %d, %Y")
+    except (ValueError, TypeError):
+        return None
 
 
 def parse_percent(cell):
@@ -160,7 +166,7 @@ def parse_row(row_text):
 def parse_wikitext_table(wikitext):
     rows = []
     for row_text in wikitext.split("\n|-"):
-        if "{{dts|" not in row_text:
+        if "||" not in row_text:
             continue
         row = parse_row(row_text)
         if row is not None:

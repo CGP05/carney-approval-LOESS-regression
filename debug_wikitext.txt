@@ -1,0 +1,208 @@
+=== Table of polls ===
+{| class="wikitable sortable mw-datatable mw-collapsible" style="text-align:center; font-size:90%; line-height:14px;"
+|- style="height:40px;"
+! rowspan="2" | Polling firm
+! rowspan="2" | Last date {{nowrap|of polling{{efn|name=order}}}}
+! rowspan="2" | Link
+! style="width:80px" | Approve
+! style="width:80px" | Disapprove
+! rowspan="2" | Unsure/{{wbr}}neither
+! rowspan="2" | Margin {{nowrap|of error{{efn|name=MOE}}}}
+! rowspan="2" | Sample size{{efn|name=sample}}
+! rowspan="2" | Polling method{{efn|name=method}}
+! rowspan="2" | Net approval
+|- class="sorttop"
+! style="background:green" | 
+! style="background:red" |
+|-
+| Liaison Strategies || September 5, 2026 || <ref name=Liaison5Sep /> || style="background:#c1f0c1" | '''66%''' || 26% || 8% ||±2.5 [[percentage point|pp]] ||1,526|| IVR|| style="background:green" | {{white|'''+40%'''}}
+|- 
+| Liaison Strategies || {{dts|August 29, 2026}}|| <ref name=Liaison29Aug />|| style="background:#c1f0c1" | '''64%''' || 27% || 8% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+37%'''}}
+|- 
+| [[Abacus Data]] || {{dts|August 26, 2026}}||<ref name=Abacus26Aug/>|| style="background:#c1f0c1" | '''56%''' || 29% || 15% || ±2.2 pp|| 2,022 || Online || style="background:green" | {{white|'''+27%'''}}
+|- 
+| Liaison Strategies || {{dts|August 15, 2026}}|| <ref name=Liaison17Aug />|| style="background:#c1f0c1" | '''60%''' || 31% || 9% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+29%'''}}
+|- 
+| [[Abacus Data]] || {{dts|August 12, 2026}}||<ref name=Abacus12Aug/>|| style="background:#c1f0c1" | '''52%''' || 31% || 17% || ±2.5 pp|| 1,499 || Online || style="background:green" | {{white|'''+21%'''}}
+|- 
+| Liaison Strategies || {{dts|August 8, 2026}}|| <ref name=Liaison10Aug />|| style="background:#c1f0c1" | '''57%''' || 33% || 9% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+24%'''}}
+|- 
+| [[Léger (company)|Léger]] || {{dts|August 3, 2026}} || <ref name=Leger10Aug/> ||style="background:#c1f0c1"| '''54%''' || 38% || 8% || ±2.5 pp || 1,514 || Online || style="background:green"| {{white|'''+16%'''}}
+|- 
+| Liaison Strategies || {{dts|August 1, 2026}}|| <ref name="Liaison3Aug" />|| style="background:#c1f0c1" | '''57%''' || 34% || 9% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+23%'''}}
+|-
+| [[Abacus Data]] || {{dts|July 29, 2026}}|| <ref name=":2" />|| style="background:#c1f0c1" | '''52%''' || 32% || 16% || ±2.2 pp|| 1,910 || Online || style="background:green" | {{white|'''+20%'''}}
+|- 
+| Liaison Strategies || {{dts|July 25, 2026}}|| <ref name="Liaison25July" />|| style="background:#c1f0c1" | '''56%''' || 35% || 9% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+21%'''}}
+|- 
+| Liaison Strategies || {{dts|July 18, 2026}}|| <ref name="Liaison20Jul" />|| style="background:#c1f0c1" | '''57%''' || 35% || 8% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+22%'''}}
+|-
+| [[Abacus Data]] || {{dts|July 16, 2026}}|| <ref name=":0" />|| style="background:#c1f0c1" | '''52%''' || 32% || 16% || ±1.5 pp || 4,205 || Online || style="background:green" | {{white|'''+20%'''}} 
+|- 
+| Liaison Strategies || {{dts|July 11, 2026}}|| <ref name="Liaison11July" />|| style="background:#c1f0c1" | '''58%''' || 35% || 7% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+23%'''}}
+|- 
+| Liaison Strategies || {{dts|July 4, 2026}}|| <ref name="Liaison6July" />|| style="background:#c1f0c1" | '''58%''' || 35% || 7% || ±2.5 pp|| 1,458 || IVR || style="background:green" | {{white|'''+23%'''}}
+|- 
+| [[Abacus Data]] || {{dts|July 2, 2026}} || <ref name=":1">{{Cite web |last=Coletto |first=David |date=2026-07-05 |title=Federal Liberal Lead Remains Stable as Canadians Settle Into a Holding Pattern |url=https://abacusdata.ca/federal-liberal-lead-remains-stable-as-canadians-settle-into-a-holding-pattern/ |access-date=2026-07-13 |website=Abacus Data |language=en}}</ref>|| style="background:#c1f0c1" | '''54%''' || 31% || 15% || ±2.0 pp || 2,366 || Online || style="background:green"| {{white|'''+23%'''}}
+|- 
+| Liaison Strategies || {{dts|June 27, 2026}}|| <ref name="Liaison29Jun" />|| style="background:#c1f0c1" | '''58%''' || 36% || 6% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+22%'''}}
+|-
+| [[Léger (company)|Léger]] || {{dts|June 22, 2026}} || <ref name=Leger22June/> ||style="background:#c1f0c1"| '''57%''' || 36% || 8% || ±2.5 pp || 1,528 || Online || style="background:green"| {{white|'''+21%'''}}
+|- 
+| Liaison Strategies || {{dts|June 20, 2026}}|| <ref name="liaison20june" />|| style="background:#c1f0c1" | '''57%''' || 36% || 7% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+21%'''}}
+|- 
+| Liaison Strategies || {{dts|June 13, 2026}}|| <ref name="liaison13june" />|| style="background:#c1f0c1" | '''57%''' || 37% || 6% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+20%'''}}
+|- 
+| Liaison Strategies || {{dts|June 6, 2026}}|| <ref name="liaison6june" />|| style="background:#c1f0c1" | '''55%''' || 39% || 6% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+16%'''}}
+|-
+| [[Abacus Data]] || {{dts|June 2, 2026}} || <ref name="abacus2june"/> ||style="background:#c1f0c1"| '''52%''' || 31% || 16% || ±2.2 pp || 1,920 || Online || style="background:green"| {{white|'''+21%'''}}
+|- 
+| Liaison Strategies || {{dts|May 31, 2026}}|| <ref name="liaison31may" />|| style="background:#c1f0c1" | '''57%''' || 38% || 5% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+19%'''}}
+|- 
+| Liaison Strategies || {{dts|May 23, 2026}}|| <ref name="liaison23may" />|| style="background:#c1f0c1" | '''59%''' || 35% || 6% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+24%'''}}
+|-
+| [[Abacus Data]] || {{dts|May 20, 2026}} || <ref name="abacus20may"/> ||style="background:#c1f0c1"| '''59%''' || 27% || 14% || ±2.23 pp|| 1,920 || Online || style="background:green"| {{white|'''+32%'''}}
+|- 
+| Liaison Strategies || {{dts|May 16, 2026}}|| <ref name="liaison16may" />|| style="background:#c1f0c1" | '''56%''' || 36% || 8% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+20%'''}}
+|- 
+| Liaison Strategies || {{dts|May 9, 2026}}|| <ref name="liaison9may" />|| style="background:#c1f0c1" | '''58%''' || 34% || 8% || ±2.5 pp|| 1,526 || IVR || style="background:green" | {{white|'''+24%'''}}
+|-
+| [[Abacus Data]] || {{dts|May 5, 2026}} || <ref name="auto94"/> ||style="background:#c1f0c1"| '''57%''' || 28% || 15% || ±2.0 pp|| 2,478 || Online || style="background:green"| {{white|'''+29%'''}}
+|- 
+| Liaison Strategies || {{dts|May 2, 2026}}|| <ref name=":3" />|| style="background:#c1f0c1" | '''60%''' || 32% || 8% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+28%'''}}
+|-
+| [[Léger (company)|Léger]] || {{dts|April 26, 2026}} || <ref name="auto93"/> ||style="background:#c1f0c1"| '''57%''' || 35% || 8% || ±2.51 pp|| 1,521|| Online || style="background:green"| {{white|'''+22%'''}}
+|- 
+| Liaison Strategies || {{dts|April 25, 2026}}|| <ref name=":4" />|| style="background:#c1f0c1" | '''62%''' || 31% || 7% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+31%'''}}
+|-
+| [[Abacus Data]] || {{dts|April 22, 2026}} || <ref name="auto92"/> ||style="background:#c1f0c1"| '''54%''' || 29% || 17% || ±2.2 pp|| 2,000 || Online || style="background:green"| {{white|'''+25%'''}}
+|- 
+| Liaison Strategies || {{dts|April 18, 2026}}|| <ref name=":5" />|| style="background:#c1f0c1" | '''62%''' || 29% || 9% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+33%'''}}
+|- 
+| Liaison Strategies || {{dts|April 11, 2026}}|| <ref name=":6" />|| style="background:#c1f0c1" | '''60%''' || 29% || 11% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+31%'''}}
+|-
+| Spark Insights || {{dts|April 8, 2026}} || <ref name="spark8apr"/> ||style="background:#c1f0c1"| '''65%''' || 35% || {{N/A}} || {{N/A}} || 4,026 || Online || style="background:green"| {{white|'''+30%'''}}
+|-
+| [[Abacus Data]] || {{dts|April 8, 2026}} || <ref name="auto91"/> ||style="background:#c1f0c1"| '''54%''' || 30% || 16% || ±2.39 pp|| 1,680 || Online || style="background:green"| {{white|'''+24%'''}}
+|- 
+| Liaison Strategies || {{dts|April 4, 2026}}|| <ref name=":7" />|| style="background:#c1f0c1" | '''61%''' || 32% || 7% || ±3.1 [[Percentage point|pp]]|| 1,000 || IVR || style="background:green" | {{white|'''+29%'''}}
+|-
+| [[Léger (company)|Léger]] || {{dts|March 30, 2026}} || <ref name="auto90"/> ||style="background:#c1f0c1"| '''58%''' || 33% || 9% || ±2.43 pp|| 1,618 || Online || style="background:green"| {{white|'''+25%'''}}
+|- 
+| Liaison Strategies || {{dts|March 28, 2026}}|| <ref name=":8" />|| style="background:#c1f0c1" | '''63%''' || 32% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+31%'''}}
+|-
+| Spark Insights || {{dts|March 26, 2026}} || <ref name="auto89"/> ||style="background:#c1f0c1"| '''68%''' || 32% || {{N/A}} || {{N/A}} || 4,000 || Online || style="background:green"| {{white|'''+36%'''}}
+|-
+| [[Abacus Data]] || {{dts|March 24, 2026}} || <ref name="auto88"/> ||style="background:#c1f0c1"| '''54%''' || 30% || 16% || ±2.51 pp|| 1,515 || Online || style="background:green"| {{white|'''+24%'''}}
+|- 
+| Liaison Strategies || {{dts|March 21, 2026}}|| <ref name=":9" />|| style="background:#c1f0c1" | '''64%''' || 32% || 6% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+32%'''}}
+|- 
+| Liaison Strategies || {{dts|March 14, 2026}}|| <ref name=":10" />|| style="background:#c1f0c1" | '''63%''' || 33% || 6% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+30%'''}}
+|-
+| [[Abacus Data]] || {{dts|March 11, 2026}} || <ref name="auto85"/> ||style="background:#c1f0c1"| '''56%''' || 28% || 16% || ±2.2 pp || 1,931 || Online || style="background:green"| {{white|'''+28%'''}}
+|- 
+| Liaison Strategies || {{dts|March 7, 2026}}|| <ref name=":11" />|| style="background:#c1f0c1" | '''64%''' || 31% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+33%'''}}
+|-
+| Spark Insights || {{dts|March 6, 2026}} || <ref name="auto84"/> ||style="background:#c1f0c1"| '''66%''' || 34% || {{N/A}} || {{N/A}} || 3,055 || Online || style="background:green"| {{white|'''+32%'''}}
+|-
+| [[Léger (company)|Léger]] || {{dts|March 2, 2026}} || <ref name="auto82"/> ||style="background:#c1f0c1"| '''59%''' || 33% || 8% || ±2.43 pp || 1,627 || Online || style="background:green"| {{white|'''+26%'''}}
+|- 
+| Liaison Strategies || {{dts|February 28, 2026}}|| <ref name=":12" />|| style="background:#c1f0c1" | '''61%''' || 33% || 6% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+28%'''}}
+|- 
+| Liaison Strategies || {{dts|February 21, 2026}}|| <ref name=":13" />|| style="background:#c1f0c1" | '''63%''' || 32% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+31%'''}}
+|-
+| Innovative Research || {{dts|February 17, 2026}} || <ref name="auto78"/> ||style="background:#c1f0c1"| '''55%''' || 41% || 4% || {{N/A}} || 1,000 || Online || style="background:green"| {{white|'''+14%'''}}
+|- 
+| Liaison Strategies || {{dts|February 14, 2026}}|| <ref name=":14" />|| style="background:#c1f0c1" | '''63%''' || 32% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+31%'''}}
+|-
+| [[Abacus Data]] || {{dts|February 10, 2026}} || <ref name="auto76"/> ||style="background:#c1f0c1"| '''51%''' || 29% || {{N/A}} || ±2.2 pp || 1,915 || Online || style="background:green"| {{white|'''+22%'''}}
+|- 
+| Liaison Strategies || {{dts|February 7, 2026}}|| <ref name=":15" />|| style="background:#c1f0c1" | '''62%''' || 33% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+29%'''}}
+|- 
+| Liaison Strategies || {{dts|January 31, 2026}}|| <ref name=":16" />|| style="background:#c1f0c1" | '''64%''' || 33% || 3% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+31%'''}}
+|-
+| [[Abacus Data]] || {{dts|January 27, 2026}} || <ref name="auto73"/> ||style="background:#c1f0c1"| '''54%''' || 31% || {{N/A}} || ±2.0 pp || 2,498 || Online || style="background:green"| {{white|'''+23%'''}}
+|-
+| [[Léger (company)|Léger]] || {{dts|January 26, 2026}} || <ref name="auto72"/> ||style="background:#c1f0c1"| '''58%''' || 35% || 8% || ±2.44 pp || 1,611 || Online || style="background:green"| {{white|'''+23%'''}}
+|- 
+| Liaison Strategies || {{dts|January 24, 2026}}|| <ref name=":17" />|| style="background:#c1f0c1" | '''62%''' || 33% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+29%'''}}
+|- 
+| Liaison Strategies || {{dts|January 17, 2026}}|| <ref name=":18" />|| style="background:#c1f0c1" | '''57%''' || 36% || 7% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+21%'''}}
+|-
+| [[Abacus Data]] || {{dts|January 14, 2026}} || <ref name="auto68"/> ||style="background:#c1f0c1"| '''47%''' || 34% || {{N/A}} || ±2.3 pp || 1,850 || Online || style="background:green"| {{white|'''+13%'''}}
+|- 
+| Liaison Strategies || {{dts|January 10, 2026}}|| <ref name=":19" />|| style="background:#c1f0c1" | '''56%''' || 37% || 7% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+19%'''}}
+|- 
+| Liaison Strategies || {{dts|January 3, 2026}}|| <ref name=":20" />|| style="background:#c1f0c1" | '''55%''' || 39% || 6% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+16%'''}}
+|- 
+| Liaison Strategies || {{dts|December 28, 2025}}|| <ref name=":21" />|| style="background:#c1f0c1" | '''56%''' || 40% || 4% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+16%'''}}
+|- 
+| Liaison Strategies || {{dts|December 21, 2025}}|| <ref name=":22" />|| style="background:#c1f0c1" | '''57%''' || 39% || 4% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+18%'''}}
+|-
+| [[Abacus Data]] || {{dts|December 9, 2025}} || <ref name="auto62"/> ||style="background:#c1f0c1"| '''47%''' || 35% || {{N/A}} || ±1.53 pp || 1,500 || Online || style="background:green"| {{white|'''+12%'''}}
+|-
+| [[Abacus Data]] || {{dts|December 1, 2025}} || <ref name="auto60"/> ||style="background:#c1f0c1"| '''47%''' || 33% || {{N/A}} || ±2.3 pp|| 1,802 || Online || style="background:green"| {{white|'''+14%'''}}
+|-
+| [[Léger (company)|Léger]] || {{dts|November 30, 2025}} || <ref name="auto59"/> ||style="background:#c1f0c1"| '''49%''' || 40% || 11% || ±2.47 pp || 1,579 || Online || style="background:green"| {{white|'''+9%'''}}
+|- 
+| Liaison Strategies || {{dts|November 30, 2025}}|| <ref name=":23" />|| style="background:#c1f0c1" | '''59%''' || 36% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+23%'''}}
+|-
+| [[Abacus Data]] || {{dts|November 27, 2025}} || <ref name="auto58"/> ||style="background:#c1f0c1"| '''48%''' || 32% || {{N/A}} || ±2 pp|| 2,421 || Online || style="background:green"| {{white|'''+16%'''}}
+|- 
+| Liaison Strategies || {{dts|November 8, 2025}}|| <ref name=":24" />|| style="background:#c1f0c1" | '''61%''' || 34% || 5% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+27%'''}}
+|-
+| [[Abacus Data]] || {{dts|November 6, 2025}} || <ref name="auto53"/> ||style="background:#c1f0c1"| '''44%''' || 34% || {{N/A}} || ±2.23 pp|| 1,916 || Online || style="background:green"| {{white|'''+10%'''}}
+|- 
+| Liaison Strategies || {{dts|November 4, 2025}}|| <ref name=":25" />|| style="background:#c1f0c1" | '''62%''' || 32% || 6% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+30%'''}}
+|-
+| [[Léger (company)|Léger]]|| {{dts|November 3, 2025}} || <ref name="auto52"/> ||style="background:#c1f0c1"| '''50%''' || 41% || 9% || ±2.5 pp|| 1,585 || Online || style="background:green"| {{white|'''+9%'''}}
+|-
+| [[Abacus Data]] || {{dts|October 29, 2025}} || <ref>{{Cite web |date=November 7, 2025 |title=Canadians' Reactions To The Federal Budget |url=https://empiricalintelligence.ca/budgetsurvey.pdf |access-date=November 7, 2025 |website=Empirical Intelligence}}</ref> ||style="background:#c1f0c1"| '''47%''' || 34% || {{N/A}} || ±1.8 pp|| 2,922 || Online || style="background:green"| {{white|'''+13%'''}}
+|-
+| [[Abacus Data]] || {{dts|October 15, 2025}} || <ref name="auto48"/> ||style="background:#c1f0c1"| '''48%''' || 32% || {{N/A}} || ±1.5 pp|| 4,501 || Online || style="background:green"| {{white|'''+16%'''}}
+|-
+| [[Léger (company)|Léger]]|| {{dts|October 5, 2025}} || <ref name="auto46"/> || style="background:#c1f0c1"| '''46%''' || 42% || 12% || ±2.5 pp || 1,562 || Online || style="background:green"| {{white|'''+4%'''}}
+|-
+| [[Abacus Data]] || {{dts|October 1, 2025}} || <ref name="auto44"/> ||style="background:#c1f0c1"| '''46%''' || 31% || {{N/A}} || ±2.1 pp || 1,504 || Online || style="background:green"| {{white|'''+15%'''}}
+|- 
+| Liaison Strategies || {{dts|September 21, 2025}}|| <ref name=":26" />|| style="background:#c1f0c1" | '''60%''' || 35% || 6% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+25%'''}}
+|-
+| [[Abacus Data]] || {{dts|September 17, 2025}} || <ref name="auto41"/> ||style="background:#c1f0c1"| '''50%''' || 30% || {{N/A}} || ±2.1 pp || 2,230 || Online || style="background:green"| {{white|'''+20%'''}}
+|-
+| [[Ipsos]]|| {{dts|September 8, 2025}} || <ref name="auto38"/> ||style="background:#c1f0c1"| '''58%''' || 42% || {{N/A}} || ±3.8 pp || 1,001 || Online || style="background:green"| {{white|'''+16%'''}}
+|-
+| [[Léger (company)|Léger]]|| {{dts|September 7, 2025}} || <ref name="auto37"/> ||style="background:#c1f0c1"| '''51%''' || 38% || 11% || ±2.5 pp || 1,592 || Online || style="background:green"| {{white|'''+13%'''}}
+|-
+|[[Abacus Data]] || {{dts|September 2, 2025}} || <ref name="auto35"/> ||style="background:#c1f0c1"| '''48%''' || 30% || {{N/A}} || ±2.5 pp || 1,500 || Online || style="background:green"| {{white|'''+18%'''}}
+|- 
+| Liaison Strategies || {{dts|August 27, 2025}}|| <ref name=":27" />|| style="background:#c1f0c1" | '''63%''' || 33% || 6% || ±3.1 pp|| 1,000 || IVR || style="background:green" | {{white|'''+30%'''}}
+|-
+| [[Abacus Data]] || {{dts|August 19, 2025}} || <ref name="auto32"/> ||style="background:#c1f0c1"| '''49%''' || 30% || {{N/A}} || ±2.2 pp || 1,915 || Online || style="background:green"| {{white|'''+19%'''}}
+|-
+| [[Abacus Data]] || {{dts|August 7, 2025}} || <ref name="auto29"/> ||style="background:#c1f0c1"| '''50%''' || 27% || {{N/A}} || ±2.4 pp || 1,686 || Online || style="background:green"| {{white|'''+23%'''}}
+|-
+| [[Léger (company)|Léger]]|| {{dts|August 4, 2025}} || <ref name="auto28"/> ||style="background:#c1f0c1"| '''54%''' || 34% || 12% || ±2.4 pp || 1,617 || Online || style="background:green"| {{white|'''+20%'''}}
+|-
+| Innovative Research|| {{dts|July 28, 2025}} || <ref name="auto26"/> ||style="background:#c1f0c1"| '''54%''' || 40% || 7% || {{N/A}} || 3,732 || Online || style="background:green"| {{white|'''+14%'''}}
+|-
+| [[Abacus Data]] || {{dts|July 15, 2025}} || <ref name="auto23"/> ||style="background:#c1f0c1"| '''52%''' || 27% || {{N/A}} || ±2.2 pp || 1,915 || Online || style="background:green"| {{white|'''+25%'''}}
+|-
+| [[Léger (company)|Léger]] || {{dts|July 6, 2025}} || <ref name="auto21"/> ||style="background:#c1f0c1"| '''55%''' || 33% || 13% || ±2.5 pp || 1,546 || Online || style="background:green"| {{white|'''+22%'''}}
+|-
+| [[Abacus Data]]|| {{dts|July 2, 2025}} || <ref name="auto18"/> ||style="background:#c1f0c1"| '''52%''' || 25% || {{N/A}} || ±2.5 pp || 1,500 || Online || style="background:green"| {{white|'''+27%'''}}
+|-
+| Innovative Research || {{dts|June 30, 2025}} || <ref name="auto17"/> ||style="background:#c1f0c1"| '''52%''' || 42% || 6% || {{N/A}} || 4,029 || Online || style="background:green"| {{white|'''+10%'''}}
+|-
+|[[Abacus Data]] || {{dts|June 19, 2025}} || <ref name="auto13"/> ||style="background:#c1f0c1"| '''52%''' || 25% || {{N/A}} || ±1.9 pp || 1,500 || Online || style="background:green"| {{white|'''+27%'''}}
+|-
+| Spark Insights|| {{dts|June 9, 2025}} ||  <ref>{{cite web |last1=Anderson |first1=Bruce |title=Carney approval level hits 67% |url=https://sparkadvocacy.ca/insights/2025/06/carney-approval-level-hits-67 |website=spark*advocacy |access-date=18 June 2025}}</ref> ||style="background:#c1f0c1"| '''67%''' || 33% || {{N/A}} || {{N/A}} || 2,500 || Online || style="background:green"| {{white|'''+34%'''}}
+|-
+| [[Abacus Data]] || {{dts|June 5, 2025}} || <ref name="auto10"/> ||style="background:#c1f0c1"| '''53%''' || 23% || {{N/A}} || ±1.9 pp || 2,585 || Online || style="background:green"| {{white|'''+30%'''}}
+|-
+| Spark Insights|| {{dts|May 30, 2025}} || <ref name="auto9"/> ||style="background:#c1f0c1"| '''64%''' || 36% || {{N/A}} || {{N/A}} || 3,450 || Online || style="background:green"| {{white|'''+28%'''}}
+|-
+| Innovative Research || {{dts|May 22, 2025}} || <ref name="auto6"/> ||style="background:#c1f0c1"| '''49%''' || 43% || 8% || {{N/A}} || 2,517 || Online || style="background:green"| {{white|'''+6%'''}}
+|-
+| [[Abacus Data]] || {{dts|May 21, 2025}} || <ref name="auto5"/> ||style="background:#c1f0c1"| '''50%''' || 24% || {{N/A}} || ±2.1 pp || 2,273 || Online || style="background:green"| {{white|'''+26%'''}}
+|-
+|}

@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 ## Overview
 This is a non-parametric [local regression](https://en.wikipedia.org/wiki/Local_regression) graph for the Wikipedia page ["Opinion polling for the 46th Canadian federal election", specifically the section "Government approval"](https://en.wikipedia.org/wiki/Opinion_polling_for_the_46th_Canadian_federal_election#Government_approval_polls).
 

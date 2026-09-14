@@ -1,7 +1,8 @@
-Sys.setlocale("LC_TIME", "English")
+Sys.setlocale("LC_TIME", "C")
 library(ggplot2)
-library(tidyverse)
-library(svglite)
+library(readr)
+library(tidyr)
+library(dplyr)
 
 ### ---------- Parameters ----------
 # Election system parameters
@@ -9,8 +10,6 @@ library(svglite)
 approvalcolors <- c("#2ca02c", "#d62728")
 
 startdate <- "2025-05-14" #
-
-enddate <- as.character(polls$Last_date_of_polling[1]) # date of latest poll in table (row 2 of the CSV, i.e. the first data row)
 
 # Figure parameters
 # individual smoothing parameter for the trend line of the 3 approval states
@@ -33,6 +32,8 @@ polls <- read_csv(
 
 # Parse 2-digit years correctly (e.g., '22-Jun-26')
 polls$Last_date_of_polling <- as.Date(polls$Last_date_of_polling, format = "%d-%b-%y") # nolint: line_length_linter.
+
+enddate <- as.character(polls$Last_date_of_polling[1]) # date of latest poll in table (row 2 of the CSV, i.e. the first data row)
 
 
 # retrieve the 3 approval states from the CSV
@@ -131,6 +132,7 @@ graph
 ggsave(
        file = "carney government approval polls.svg",
        plot = graph,
+  device = grDevices::svg,
        width = graph_width,
        height = graph_height)
 

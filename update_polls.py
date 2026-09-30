@@ -33,7 +33,7 @@ CSV_COLUMNS = [
 
 # Firms to exclude even if they show up in the table (they poll Carney/PM
 # favourability or something else rather than government/PM approval).
-# See "Which polling firms to inlcude.md".
+# See "Which polling firms to inlclude.md".
 EXCLUDED_FIRMS = {
     "Nanos Research",
     "Mainstreet Research",

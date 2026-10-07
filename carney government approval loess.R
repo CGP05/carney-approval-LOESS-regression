@@ -18,7 +18,6 @@ approvalspansize <- c(0.25, 0.25, 0.25)
 
 transp <- "55"              # transparency level of points
 nnum <- 500                 # number of points used for trendline (resolution)
-limits <- c(25, 75)          # percentage limits of figure
 graph_width <- 18           # image width
 graph_height <- 8           # image height
 
@@ -96,10 +95,9 @@ for (i in seq_along(approvalstates)) {
 
 # customize graph
 graph <- graph +
-  # y-axis: add % and custom limits
+  # y-axis: add % (removed custom limits)
   scale_y_continuous(
-                     labels = function(x) paste0(x, "%"),
-                     limits = limits) +
+                     labels = function(x) paste0(x, "%")) +
   # x-axis: 1 month grid, labels every 3 months
   scale_x_date(
                limits = as.Date(c(startdate, enddate)),

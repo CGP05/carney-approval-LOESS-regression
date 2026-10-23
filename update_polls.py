@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#by Claude Sonnet 5
+#Made with some LLM assisstance especially Claude Sonnet 5
 """Fetch new Carney government approval polls from Wikipedia and append them to the local CSV.
 
 Rather than scraping rendered HTML (which buries the numbers in citation
@@ -105,6 +105,8 @@ def strip_wikilinks(text):
 def clean_cell(text):
     """
     Clean up a cell's text by removing wiki markup, references, and extra whitespace
+    >>> clean_cell("Mainstreet{{efn|Note}}")
+    'Mainstreet'
     """
     text = strip_wikilinks(text)
     text = re.sub(r"<ref[^>]*/?>.*?</ref>|<ref[^>]*/>", "", text, flags=re.DOTALL)
@@ -255,4 +257,6 @@ def main():
 
 
 if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
     main()

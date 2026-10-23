@@ -46,6 +46,9 @@ HEADERS = {"User-Agent": "carney-approval-wikipedia-scraper (open source project
 
 
 def api_get(params):
+    """
+    Fetch data from the MediaWiki API.
+    """
     params = {**params, "format": "json"}
     response = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
     response.raise_for_status()
@@ -53,7 +56,9 @@ def api_get(params):
 
 
 def find_table_of_polls_section():
-    """Locate the 'Table of polls' section nested under 'Government approval polls'."""
+    """
+    Locate the 'Table of polls' section nested under 'Government approval polls'.
+    """
     data = api_get({"action": "parse", "page": PAGE_TITLE, "prop": "sections"})
     sections = data["parse"]["sections"]
 
@@ -72,6 +77,9 @@ def find_table_of_polls_section():
 
 
 def fetch_table_wikitext():
+    """
+    Fetch the raw wikitext of the "Table of polls" subsection."
+    """
     section_index = find_table_of_polls_section()
     data = api_get(
         {
@@ -85,6 +93,9 @@ def fetch_table_wikitext():
 
 
 def strip_wikilinks(text):
+    """
+    Remove MediaWiki-style links from the text.
+    """
     # [[Target|Label]] -> Label, [[Target]] -> Target
     text = re.sub(r"\[\[[^\]|]*\|([^\]]*)\]\]", r"\1", text)
     text = re.sub(r"\[\[([^\]]*)\]\]", r"\1", text)
@@ -92,6 +103,9 @@ def strip_wikilinks(text):
 
 
 def clean_cell(text):
+    """
+    Clean up a cell's text by removing wiki markup, references, and extra whitespace
+    """
     text = strip_wikilinks(text)
     text = re.sub(r"<ref[^>]*/?>.*?</ref>|<ref[^>]*/>", "", text, flags=re.DOTALL)
     text = re.sub(r"style\s*=\s*\"[^\"]*\"\s*\|", "", text)
@@ -104,6 +118,9 @@ def clean_cell(text):
 
 
 def parse_date(cell):
+    """
+    Parse a date from a wikitext cell.
+    """
     # Usually wrapped in {{dts|...}} (a sortkey template), but newly added
     # rows sometimes appear as a plain "Month Day, Year" string before an
     # editor gets around to wrapping them.
@@ -118,6 +135,9 @@ def parse_date(cell):
 
 
 def parse_percent(cell):
+    """
+    Parse a percentage from a wikitext cell.
+    """
     cell = clean_cell(cell)
     if "N/A" in cell or cell in ("", "-", "\u2014"):
         return "\u2014N/a"
@@ -126,6 +146,9 @@ def parse_percent(cell):
 
 
 def parse_margin_of_error(cell):
+    """
+    Parse the margin of error from a wikitext cell.
+    """
     cell = clean_cell(cell)
     if "N/A" in cell or cell in ("", "-", "\u2014"):
         return "\u2014N/a"
@@ -133,6 +156,9 @@ def parse_margin_of_error(cell):
 
 
 def parse_row(row_text):
+    """
+    Parse a single row of the wikitext table into a dictionary.
+    """
     cells = row_text.split("||")
     if len(cells) < 10:
         return None
@@ -164,6 +190,9 @@ def parse_row(row_text):
 
 
 def parse_wikitext_table(wikitext):
+    """
+    Parse the wikitext of the "Table of polls" into a Pandas DataFrame.
+    """
     rows = []
     for row_text in wikitext.split("\n|-"):
         if "||" not in row_text:
@@ -179,6 +208,9 @@ def parse_wikitext_table(wikitext):
 
 
 def main():
+    """
+    Main function to update the polling data.
+    """
     wikitext = fetch_table_wikitext()
     scraped = parse_wikitext_table(wikitext)
 

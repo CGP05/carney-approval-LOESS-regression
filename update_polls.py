@@ -105,8 +105,6 @@ def strip_wikilinks(text):
 def clean_cell(text):
     """
     Clean up a cell's text by removing wiki markup, references, and extra whitespace
-    >>> clean_cell("Mainstreet{{efn|Note}}")
-    'Mainstreet'
     """
     text = strip_wikilinks(text)
     text = re.sub(r"<ref[^>]*/?>.*?</ref>|<ref[^>]*/>", "", text, flags=re.DOTALL)

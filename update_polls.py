@@ -243,7 +243,7 @@ def main():
 
     new_rows = new_rows.sort_values("Last_date_of_polling", ascending=False)
     summary_lines = [
-        f"- **{row['Polling_firm']}** ({row['Last_date_of_polling'].strftime('%d-%b-%y')}): "
+        f"- {row['Polling_firm']} ({row['Last_date_of_polling'].strftime('%d-%b-%y')}): "
         f"Approve {row['Approve']}, Disapprove {row['Disapprove']}, Net {row['Net_approval']}"
         for _, row in new_rows.iterrows()
     ]

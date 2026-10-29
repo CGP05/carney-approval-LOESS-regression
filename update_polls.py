@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-#Made with some LLM assisstance especially Claude Sonnet 5
+#Made with some LLM assisstance, Claude Sonnet 5 and Cohere North Mini Code
 """Fetch new Carney government approval polls from Wikipedia and append them to the local CSV.
 
 Rather than scraping rendered HTML (which buries the numbers in citation
@@ -49,10 +48,13 @@ def api_get(params):
     """
     Fetch data from the MediaWiki API.
     """
-    params = {**params, "format": "json"}
-    response = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
-    response.raise_for_status()
-    return response.json()
+    try:
+      params = {**params, "format": "json"}
+      response = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
+      response.raise_for_status()
+      return response.json()
+    except requests.RequestException as e:
+      raise RuntimeError(f"Failed to fetch data from Wikipedia API: {e}")
 
 
 def find_table_of_polls_section():

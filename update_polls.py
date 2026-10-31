@@ -106,15 +106,15 @@ def clean_cell(text):
     """
     Clean up a cell's text by removing wiki markup, references, and extra whitespace
     """
-    text = strip_wikilinks(text)
-    text = re.sub(r"<ref[^>]*/?>.*?</ref>|<ref[^>]*/>", "", text, flags=re.DOTALL)
-    text = re.sub(r"style\s*=\s*\"[^\"]*\"\s*\|", "", text)
-    text = text.replace("'''", "")
-    text = re.sub(r"\{\{white\|(.*?)\}\}", r"\1", text)
-    text = re.sub(r"\{\{nowrap\|(.*?)\}\}", r"\1", text)
-    text = text.replace("\u00A0", " ")
-    text = text.strip()
-    return text
+    parsed = wtp.parse(text)
+
+    for tag in parsed.get_tags():     # Remove references
+        if tag.tag == "ref":
+            tag.string = ""
+
+    text = parsed.plain_text()     # Remove wiki formatting
+
+    return text.replace("\u00A0", " ").strip()
 
 
 def parse_date(cell):

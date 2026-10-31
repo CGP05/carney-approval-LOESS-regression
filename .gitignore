@@ -2,8 +2,15 @@
 .Rhistory
 .RData
 .Ruserdata
+.Rprofile
 new_polls.txt
 __pycache__/
 *.pyc
 nul
 .posit/assistant
+.Rproj
+.txt
+.posit
+.png
+.vscode/
+.ruff_cache/

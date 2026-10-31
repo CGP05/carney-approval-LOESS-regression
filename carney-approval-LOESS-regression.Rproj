@@ -12,6 +12,6 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
-PythonType: system
-PythonVersion: 3.13.4
-PythonPath: C:/ProgramData/chocolatey/bin/python3.13.exe
+PythonType: virtualenv
+PythonVersion: 3.12.14
+PythonPath: C:/Users/Christian/AppData/Local/R/cache/R/reticulate/uv/cache/archive-v0/fcXb3NDv_k9h2MGd/Scripts/python.exe

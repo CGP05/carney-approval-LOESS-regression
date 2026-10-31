@@ -5,11 +5,13 @@ MediaWiki API and parses the syntax directly. New rows are merged
 into the existing CSV (deduped on firm + date) and written back in the same
 newest-first order and formatting the CSV already uses.
 """
+
 import re
 from pathlib import Path
-import wikitextparser as wtp
+
 import pandas as pd
 import requests
+import wikitextparser as wtp
 
 API_URL = "https://en.wikipedia.org/w/api.php"
 PAGE_TITLE = "Opinion polling for the 46th Canadian federal election"
@@ -59,35 +61,37 @@ def api_get(params):
         return response.json()
 
     except requests.RequestException as e:
-        raise RuntimeError(
-            f"Failed to fetch data from Wikipedia API: {e}"
-        )
+        raise RuntimeError(f"Failed to fetch data from Wikipedia API: {e}")
 
 
 def find_table_of_polls_section():
     """
     Locate the 'Table of polls' section nested under 'Government approval polls'.
     """
-    data = api_get({
-      "action": "parse", 
-      "page": PAGE_TITLE, 
-      "prop": "sections",
-    })
+    data = api_get(
+        {
+            "action": "parse",
+            "page": PAGE_TITLE,
+            "prop": "sections",
+        }
+    )
     sections = data["parse"]["sections"]
 
     in_government_approval = False
-    
+
     for section in sections:
         title = section["line"]
         level = section["toclevel"]
-        
-        if level == 1:
-          in_government_approval = title == "Government approval polls"
-        
-        if in_government_approval and title == "Table of polls":
-          return section["index"]
 
-    raise RuntimeError("Could not find the 'Table of polls' section under Government approval polls.")
+        if level == 1:
+            in_government_approval = title == "Government approval polls"
+
+        if in_government_approval and title == "Table of polls":
+            return section["index"]
+
+    raise RuntimeError(
+        "Could not find the 'Table of polls' section under Government approval polls."
+    )
 
 
 def fetch_table_wikitext():
@@ -95,30 +99,31 @@ def fetch_table_wikitext():
     Fetch the raw wikitext of the "Table of polls" subsection."
     """
     section_index = find_table_of_polls_section()
-    
-    data = api_get({
+
+    data = api_get(
+        {
             "action": "parse",
             "page": PAGE_TITLE,
             "prop": "wikitext",
             "section": section_index,
-        })
-        
+        }
+    )
+
     return data["parse"]["wikitext"]["*"]
-  
-  
+
+
 def clean_cell(text):
     """
     Clean up a cell's text by removing wiki markup, references, and extra whitespace
     """
     parsed = wtp.parse(text)
 
-    for tag in parsed.get_tags():
-        if tag.tag == "ref":
-            tag.string = ""
+    for tag in parsed.get_tags("ref"):
+        tag.string = ""
 
     text = parsed.plain_text()
 
-    return text.replace("\u00A0", " ").strip()
+    return text.replace("\u00a0", " ").strip()
 
 
 def parse_date(cell):
@@ -126,14 +131,14 @@ def parse_date(cell):
     Parse a date from a wikitext cell.
     """
     raw_date = clean_cell(cell)
-    
+
     if not raw_date:
-      return None
-    
+        return None
+
     try:
-      return pd.to_datetime(raw_date, format="%B %d, %Y")
+        return pd.to_datetime(raw_date, format="%B %d, %Y")
     except (ValueError, TypeError):
-      return None
+        return None
 
 
 def parse_percent(cell):
@@ -141,12 +146,12 @@ def parse_percent(cell):
     Parse a percentage from a wikitext cell.
     """
     cell = clean_cell(cell)
-    
+
     if "N/A" in cell or cell in ("N/A", "-", "—"):
         return "—N/a"
-      
+
     match = re.search(r"[+-]?\d+(?:\.\d+)?%", cell)
-    
+
     return match.group(0) if match else cell
 
 
@@ -155,7 +160,7 @@ def parse_margin_of_error(cell):
     Parse the margin of error from a wikitext cell.
     """
     cell = clean_cell(cell)
-    
+
     if not cell or cell in ("N/A", "-", "—"):
         return "—N/a"
 
@@ -166,13 +171,13 @@ def parse_row(cells):
     """
     Parse a single row of the wikitext table into a dictionary.
     """
-    
+
     if len(cells) < 10:
         return None
 
     firm = clean_cell(cells[0])
     date = parse_date(cells[1])
-    
+
     if date is None:
         return None
 
@@ -221,14 +226,20 @@ def main():
 
     excluded = scraped[scraped["Polling_firm"].isin(EXCLUDED_FIRMS)]
     if not excluded.empty:
-        print(f"Skipping {len(excluded)} row(s) from excluded firms: {sorted(excluded['Polling_firm'].unique())}")
+        print(
+            f"Skipping {len(excluded)} row(s) from excluded firms: {sorted(excluded['Polling_firm'].unique())}"
+        )
     scraped = scraped[~scraped["Polling_firm"].isin(EXCLUDED_FIRMS)].copy()
 
     existing = pd.read_csv(CSV_PATH)
-    existing["Last_date_of_polling"] = pd.to_datetime(existing["Last_date_of_polling"], format="%d-%b-%y")
+    existing["Last_date_of_polling"] = pd.to_datetime(
+        existing["Last_date_of_polling"], format="%d-%b-%y"
+    )
 
     existing_keys = set(zip(existing["Polling_firm"], existing["Last_date_of_polling"]))
-    scraped["_key"] = list(zip(scraped["Polling_firm"], scraped["Last_date_of_polling"]))
+    scraped["_key"] = list(
+        zip(scraped["Polling_firm"], scraped["Last_date_of_polling"])
+    )
     new_rows = scraped[~scraped["_key"].isin(existing_keys)].drop(columns="_key")
 
     if new_rows.empty:
@@ -240,8 +251,12 @@ def main():
     # Stable sort so ties on the same date keep their existing relative order
     # (Wikipedia orders same-date polls by publication time; a quicksort
     # would needlessly shuffle rows that are already in the right order).
-    combined = combined.sort_values("Last_date_of_polling", ascending=False, kind="mergesort")
-    combined["Last_date_of_polling"] = combined["Last_date_of_polling"].dt.strftime("%d-%b-%y")
+    combined = combined.sort_values(
+        "Last_date_of_polling", ascending=False, kind="mergesort"
+    )
+    combined["Last_date_of_polling"] = combined["Last_date_of_polling"].dt.strftime(
+        "%d-%b-%y"
+    )
 
     # Match the CSV's existing conventions: CRLF line endings and a UTF-8 BOM.
     combined.to_csv(CSV_PATH, index=False, encoding="utf-8-sig", lineterminator="\r\n")

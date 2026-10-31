@@ -59,7 +59,11 @@ def find_table_of_polls_section():
     """
     Locate the 'Table of polls' section nested under 'Government approval polls'.
     """
-    data = api_get({"action": "parse", "page": PAGE_TITLE, "prop": "sections"})
+    data = api_get({
+      "action": "parse", 
+      "page": PAGE_TITLE, 
+      "prop": "sections",
+    })
     sections = data["parse"]["sections"]
 
     in_government_approval = False
@@ -90,18 +94,8 @@ def fetch_table_wikitext():
         }
     )
     return data["parse"]["wikitext"]["*"]
-
-
-def strip_wikilinks(text):
-    """
-    Remove MediaWiki-style links from the text.
-    """
-    # [[Target|Label]] -> Label, [[Target]] -> Target
-    text = re.sub(r"\[\[[^\]|]*\|([^\]]*)\]\]", r"\1", text)
-    text = re.sub(r"\[\[([^\]]*)\]\]", r"\1", text)
-    return text
-
-
+  
+  
 def clean_cell(text):
     """
     Clean up a cell's text by removing wiki markup, references, and extra whitespace

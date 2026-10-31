@@ -1,4 +1,3 @@
-#Made with some LLM assisstance, Claude Sonnet 5 and Cohere North Mini Code
 """Fetch new Carney government approval polls from Wikipedia and append them to the local CSV.
 
 This data pipeline directly pulls the raw wikitext (rather than the rendered HTML) of the "Table of polls" subsection under "Government approval polls" via the
@@ -47,12 +46,22 @@ def api_get(params):
     Fetch data from the MediaWiki API.
     """
     try:
-      params = {**params, "format": "json"}
-      response = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
-      response.raise_for_status()
-      return response.json()
+        params = {**params, "format": "json"}
+
+        response = requests.get(
+            API_URL,
+            params=params,
+            headers=HEADERS,
+            timeout=30,
+        )
+
+        response.raise_for_status()
+        return response.json()
+
     except requests.RequestException as e:
-      raise RuntimeError(f"Failed to fetch data from Wikipedia API: {e}")
+        raise RuntimeError(
+            f"Failed to fetch data from Wikipedia API: {e}"
+        )
 
 
 def find_table_of_polls_section():
@@ -67,15 +76,16 @@ def find_table_of_polls_section():
     sections = data["parse"]["sections"]
 
     in_government_approval = False
+    
     for section in sections:
-        if section["line"] == "Government approval polls" and section["toclevel"] == 1:
-            in_government_approval = True
-            continue
-        if in_government_approval and section["toclevel"] == 1:
-            # Reached the next top-level section without finding our table.
-            break
-        if in_government_approval and section["line"] == "Table of polls":
-            return section["index"]
+        title = section["line"]
+        level = section["toclevel"]
+        
+        if level == 1:
+          in_government_approval = title == "Government approval polls"
+        
+        if in_government_approval and title == "Table of polls":
+          return section["index"]
 
     raise RuntimeError("Could not find the 'Table of polls' section under Government approval polls.")
 
@@ -85,14 +95,14 @@ def fetch_table_wikitext():
     Fetch the raw wikitext of the "Table of polls" subsection."
     """
     section_index = find_table_of_polls_section()
-    data = api_get(
-        {
+    
+    data = api_get({
             "action": "parse",
             "page": PAGE_TITLE,
             "prop": "wikitext",
             "section": section_index,
-        }
-    )
+        })
+        
     return data["parse"]["wikitext"]["*"]
   
   
@@ -102,11 +112,11 @@ def clean_cell(text):
     """
     parsed = wtp.parse(text)
 
-    for tag in parsed.get_tags():     # Remove references
+    for tag in parsed.get_tags():
         if tag.tag == "ref":
             tag.string = ""
 
-    text = parsed.plain_text()     # Remove wiki formatting
+    text = parsed.plain_text()
 
     return text.replace("\u00A0", " ").strip()
 
@@ -115,17 +125,15 @@ def parse_date(cell):
     """
     Parse a date from a wikitext cell.
     """
-    # Usually wrapped in {{dts|...}} (a sortkey template), but newly added
-    # rows sometimes appear as a plain "Month Day, Year" string before an
-    # editor gets around to wrapping them.
-    match = re.search(r"\{\{dts\|([^}]+)\}\}", cell)
-    raw_date = match.group(1).strip() if match else clean_cell(cell)
+    raw_date = clean_cell(cell)
+    
     if not raw_date:
-        return None
+      return None
+    
     try:
-        return pd.to_datetime(raw_date, format="%B %d, %Y")
+      return pd.to_datetime(raw_date, format="%B %d, %Y")
     except (ValueError, TypeError):
-        return None
+      return None
 
 
 def parse_percent(cell):
@@ -133,9 +141,12 @@ def parse_percent(cell):
     Parse a percentage from a wikitext cell.
     """
     cell = clean_cell(cell)
-    if "N/A" in cell or cell in ("", "-", "\u2014"):
-        return "\u2014N/a"
+    
+    if "N/A" in cell or cell in ("N/A", "-", "—"):
+        return "—N/a"
+      
     match = re.search(r"[+-]?\d+(?:\.\d+)?%", cell)
+    
     return match.group(0) if match else cell
 
 
@@ -144,42 +155,37 @@ def parse_margin_of_error(cell):
     Parse the margin of error from a wikitext cell.
     """
     cell = clean_cell(cell)
-    if "N/A" in cell or cell in ("", "-", "\u2014"):
-        return "\u2014N/a"
-    return re.sub(r"\s+", " ", cell)
+    
+    if not cell or cell in ("N/A", "-", "—"):
+        return "—N/a"
+
+    return " ".join(cell.split())
 
 
-def parse_row(row_text):
+def parse_row(cells):
     """
     Parse a single row of the wikitext table into a dictionary.
     """
-    cells = row_text.split("||")
+    
     if len(cells) < 10:
         return None
 
-    firm = clean_cell(cells[0].strip().lstrip("|").strip())
+    firm = clean_cell(cells[0])
     date = parse_date(cells[1])
+    
     if date is None:
         return None
-
-    approve = parse_percent(cells[3])
-    disapprove = parse_percent(cells[4])
-    unsure = parse_percent(cells[5])
-    moe = parse_margin_of_error(cells[6])
-    sample_size = clean_cell(cells[7])
-    method = clean_cell(cells[8])
-    net_approval = parse_percent(cells[9]).lstrip("+")
 
     return {
         "Polling_firm": firm,
         "Last_date_of_polling": date,
-        "Approve": approve,
-        "Disapprove": disapprove,
-        "Unsure/neither": unsure,
-        "Margin_of_error": moe,
-        "Sample_size": sample_size,
-        "Polling_method": method,
-        "Net_approval": net_approval,
+        "Approve": parse_percent(cells[3]),
+        "Disapprove": parse_percent(cells[4]),
+        "Unsure/neither": parse_percent(cells[5]),
+        "Margin_of_error": parse_margin_of_error(cells[6]),
+        "Sample_size": clean_cell(cells[7]),
+        "Polling_method": clean_cell(cells[8]),
+        "Net_approval": parse_percent(cells[9]).lstrip("+"),
     }
 
 
@@ -187,16 +193,21 @@ def parse_wikitext_table(wikitext):
     """
     Parse the wikitext of the "Table of polls" into a Pandas DataFrame.
     """
+    parsed = wtp.parse(wikitext)
+    table = parsed.tables[0]
+
     rows = []
-    for row_text in wikitext.split("\n|-"):
-        if "||" not in row_text:
-            continue
-        row = parse_row(row_text)
+
+    for cells in table.data()[2:]:
+        row = parse_row(cells)
+
         if row is not None:
             rows.append(row)
 
     if not rows:
-        raise RuntimeError("Parsed zero rows from the Government approval polls wikitext table.")
+        raise RuntimeError(
+            "Parsed zero rows from the Government approval polls wikitext table."
+        )
 
     return pd.DataFrame(rows, columns=CSV_COLUMNS)
 

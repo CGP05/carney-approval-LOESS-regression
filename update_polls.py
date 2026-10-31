@@ -1,16 +1,14 @@
 #Made with some LLM assisstance, Claude Sonnet 5 and Cohere North Mini Code
 """Fetch new Carney government approval polls from Wikipedia and append them to the local CSV.
 
-Rather than scraping rendered HTML (which buries the numbers in citation
-templates, sort keys, and colour-shading markup), this pulls the raw wikitext
-of the "Table of polls" subsection under "Government approval polls" via the
-MediaWiki API and parses the wiki-table syntax directly. New rows are merged
+This data pipeline directly pulls the raw wikitext (rather than the rendered HTML) of the "Table of polls" subsection under "Government approval polls" via the
+MediaWiki API and parses the syntax directly. New rows are merged
 into the existing CSV (deduped on firm + date) and written back in the same
 newest-first order and formatting the CSV already uses.
 """
 import re
 from pathlib import Path
-
+import wikitextparser as wtp
 import pandas as pd
 import requests
 

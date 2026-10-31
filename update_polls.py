@@ -29,8 +29,7 @@ CSV_COLUMNS = [
     "Net_approval",
 ]
 
-# Firms to exclude even if they show up in the table (they poll Carney/PM
-# favourability or something else rather than government/PM approval).
+
 # See "Which polling firms to inlclude.md".
 EXCLUDED_FIRMS = {
     "Nanos Research",
@@ -43,7 +42,7 @@ EXCLUDED_FIRMS = {
 HEADERS = {"User-Agent": "carney-approval-wikipedia-scraper (open source project)"}
 
 
-def api_get(params):
+def api_get(params:dict) -> dict:
     """
     Fetch data from the MediaWiki API.
     """
@@ -64,7 +63,7 @@ def api_get(params):
         raise RuntimeError(f"Failed to fetch data from Wikipedia API: {e}")
 
 
-def find_table_of_polls_section():
+def find_table_of_polls_section() -> str:
     """
     Locate the 'Table of polls' section nested under 'Government approval polls'.
     """
@@ -94,7 +93,7 @@ def find_table_of_polls_section():
     )
 
 
-def fetch_table_wikitext():
+def fetch_table_wikitext() -> str:
     """
     Fetch the raw wikitext of the "Table of polls" subsection."
     """
@@ -112,7 +111,7 @@ def fetch_table_wikitext():
     return data["parse"]["wikitext"]["*"]
 
 
-def clean_cell(text):
+def clean_cell(text:str) -> str:
     """
     Clean up a cell's text by removing wiki markup, references, and extra whitespace
     """
@@ -126,7 +125,7 @@ def clean_cell(text):
     return text.replace("\u00a0", " ").strip()
 
 
-def parse_date(cell):
+def parse_date(cell:str) -> pd.Timestamp | None:
     """
     Parse a date from a wikitext cell.
     """
@@ -141,7 +140,7 @@ def parse_date(cell):
         return None
 
 
-def parse_percent(cell):
+def parse_percent(cell:str) -> str:
     """
     Parse a percentage from a wikitext cell.
     """
@@ -155,7 +154,7 @@ def parse_percent(cell):
     return match.group(0) if match else cell
 
 
-def parse_margin_of_error(cell):
+def parse_margin_of_error(cell:str) -> str:
     """
     Parse the margin of error from a wikitext cell.
     """
@@ -171,7 +170,6 @@ def parse_row(cells):
     """
     Parse a single row of the wikitext table into a dictionary.
     """
-
     if len(cells) < 10:
         return None
 
@@ -194,7 +192,7 @@ def parse_row(cells):
     }
 
 
-def parse_wikitext_table(wikitext):
+def parse_wikitext_table(wikitext:str) -> pd.DataFrame:
     """
     Parse the wikitext of the "Table of polls" into a Pandas DataFrame.
     """
@@ -217,7 +215,7 @@ def parse_wikitext_table(wikitext):
     return pd.DataFrame(rows, columns=CSV_COLUMNS)
 
 
-def main():
+def main() -> None:
     """
     Main function to update the polling data.
     """

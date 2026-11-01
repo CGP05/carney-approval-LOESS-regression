@@ -246,9 +246,7 @@ def main() -> None:
         return
 
     combined = pd.concat([existing, new_rows], ignore_index=True)
-    # Stable sort so ties on the same date keep their existing relative order
-    # (Wikipedia orders same-date polls by publication time; a quicksort
-    # would needlessly shuffle rows that are already in the right order).
+  
     combined = combined.sort_values(
         "Last_date_of_polling", ascending=False, kind="mergesort"
     )
@@ -256,7 +254,6 @@ def main() -> None:
         "%d-%b-%y"
     )
 
-    # Match the CSV's existing conventions: CRLF line endings and a UTF-8 BOM.
     combined.to_csv(CSV_PATH, index=False, encoding="utf-8-sig", lineterminator="\r\n")
 
     new_rows = new_rows.sort_values("Last_date_of_polling", ascending=False)

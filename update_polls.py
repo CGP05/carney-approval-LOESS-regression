@@ -30,7 +30,7 @@ CSV_COLUMNS = [
 ]
 
 
-# See "Which polling firms to inlclude.md".
+# See bottom fo Readme.md.
 EXCLUDED_FIRMS = {
     "Nanos Research",
     "Mainstreet Research",

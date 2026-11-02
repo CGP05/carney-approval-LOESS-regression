@@ -30,7 +30,7 @@ CSV_COLUMNS = [
 ]
 
 
-# See bottom fo Readme.md.
+# See bottom for Readme.md.
 EXCLUDED_FIRMS = {
     "Nanos Research",
     "Mainstreet Research",

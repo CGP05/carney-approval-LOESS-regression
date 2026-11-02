@@ -16,7 +16,6 @@ import wikitextparser as wtp
 API_URL = "https://en.wikipedia.org/w/api.php"
 PAGE_TITLE = "Opinion polling for the 46th Canadian federal election"
 CSV_PATH = Path("carney government approval polls.csv")
-NEW_POLLS_SUMMARY_PATH = Path("new_polls.txt")
 CSV_COLUMNS = [
     "Polling_firm",
     "Last_date_of_polling",
@@ -179,16 +178,29 @@ def parse_row(cells):
     if date is None:
         return None
 
+    approve = parse_percent(cells[3])
+    disapprove = parse_percent(cells[4])
+    net = parse_percent(cells[9]).lstrip("+")
+
+    if not net or net == "—N/a":
+        try:
+            app_val = float(approve.rstrip("%"))
+            dis_val = float(disapprove.rstrip("%"))
+            diff = app_val - dis_val
+            net = f"{int(diff)}%" if diff.is_integer() else f"{diff:.1f}%"
+        except ValueError:
+            net = "—N/a"
+
     return {
         "Polling_firm": firm,
         "Last_date_of_polling": date,
-        "Approve": parse_percent(cells[3]),
-        "Disapprove": parse_percent(cells[4]),
+        "Approve": approve,
+        "Disapprove": disapprove,
         "Unsure/neither": parse_percent(cells[5]),
         "Margin_of_error": parse_margin_of_error(cells[6]),
         "Sample_size": clean_cell(cells[7]),
         "Polling_method": clean_cell(cells[8]),
-        "Net_approval": parse_percent(cells[9]).lstrip("+"),
+        "Net_approval": net,
     }
 
 
@@ -242,7 +254,6 @@ def main() -> None:
 
     if new_rows.empty:
         print("No new polls found; CSV is already up to date.")
-        NEW_POLLS_SUMMARY_PATH.write_text("", encoding="utf-8")
         return
 
     combined = pd.concat([existing, new_rows], ignore_index=True)
@@ -262,7 +273,6 @@ def main() -> None:
         f"Approve {row['Approve']}, Disapprove {row['Disapprove']}, Net {row['Net_approval']}"
         for _, row in new_rows.iterrows()
     ]
-    NEW_POLLS_SUMMARY_PATH.write_text("\n".join(summary_lines), encoding="utf-8")
 
     print(f"Added {len(new_rows)} new poll(s):")
     for line in summary_lines:

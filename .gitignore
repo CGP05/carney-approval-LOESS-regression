@@ -1,5 +1,6 @@
 carney-approval-LOESS-regression.Rproj
 debug_wikitext.txt
+*.txt
 
 *.Rproj.user
 *.Rhistory
@@ -17,3 +18,4 @@ __pycache__/
 *.swo
 *.bak
 *.tmp
+.posit/assistant

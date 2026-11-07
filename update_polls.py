@@ -41,7 +41,7 @@ EXCLUDED_FIRMS = {
 HEADERS = {"User-Agent": "carney-approval-wikipedia-scraper (open source project)"}
 
 
-def api_get(params:dict) -> dict:
+def api_get(params: dict) -> dict:
     """
     Fetch data from the MediaWiki API.
     """
@@ -110,7 +110,7 @@ def fetch_table_wikitext() -> str:
     return data["parse"]["wikitext"]["*"]
 
 
-def clean_cell(text:str) -> str:
+def clean_cell(text: str) -> str:
     """
     Clean up a cell's text by removing wiki markup, references, and extra whitespace
     """
@@ -124,7 +124,7 @@ def clean_cell(text:str) -> str:
     return text.replace("\u00a0", " ").strip()
 
 
-def parse_date(cell:str) -> pd.Timestamp | None:
+def parse_date(cell: str) -> pd.Timestamp | None:
     """
     Parse a date from a wikitext cell.
     """
@@ -139,7 +139,7 @@ def parse_date(cell:str) -> pd.Timestamp | None:
         return None
 
 
-def parse_percent(cell:str) -> str:
+def parse_percent(cell: str) -> str:
     """
     Parse a percentage from a wikitext cell.
     """
@@ -153,7 +153,7 @@ def parse_percent(cell:str) -> str:
     return match.group(0) if match else cell
 
 
-def parse_margin_of_error(cell:str) -> str:
+def parse_margin_of_error(cell: str) -> str:
     """
     Parse the margin of error from a wikitext cell.
     """
@@ -204,7 +204,7 @@ def parse_row(cells):
     }
 
 
-def parse_wikitext_table(wikitext:str) -> pd.DataFrame:
+def parse_wikitext_table(wikitext: str) -> pd.DataFrame:
     """
     Parse the wikitext of the "Table of polls" into a Pandas DataFrame.
     """

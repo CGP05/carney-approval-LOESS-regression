@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Carney Government Non-Linear Approval Rating Tracker
 
 ## Overview
@@ -37,3 +42,4 @@ I will try to see if I can add more (wrote "done" in the chart below for the pol
 | Léger | - | Kolosowski Strategies |
 | Ipsos (done) | - | Pollera |
 | Liaison Strategies (someone added 38 of them on one day!) | - | - |
+

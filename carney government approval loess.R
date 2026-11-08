@@ -9,7 +9,7 @@ library(dplyr)
 # Approve = Green, Disapprove = Red
 approvalcolors <- c("#2ca02c", "#d62728")
 
-startdate <- "2025-03-14" # Day Carney was sworn in as Prime Minister of Canada
+startdate <- "2025-03-14" # The day Mark Carney was sworn in as Prime Minister of Canada
 
 # Figure parameters
 # individual smoothing parameter for the trend line of the 2 approval states

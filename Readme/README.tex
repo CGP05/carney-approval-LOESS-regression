@@ -1,0 +1,170 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\usepackage{svg}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\section{Carney Government Non-Linear Approval Rating
+Tracker}\label{carney-government-non-linear-approval-rating-tracker}
+
+\subsection{Overview}\label{overview}
+
+This is a non-parametric
+\href{https://en.wikipedia.org/wiki/Local_regression}{local regression}
+graph for the Wikipedia page
+\href{https://en.wikipedia.org/wiki/Opinion_polling_for_the_46th_Canadian_federal_election\#Government_approval_polls}{``Opinion
+polling for the 46th Canadian federal election'', specifically the
+section ``Government approval''}.
+
+\textbf{Current version:}
+\pandocbounded{\includesvg[keepaspectratio]{carney government approval polls.svg}}
+
+\subsection{Acknowledgements}\label{acknowledgements}
+
+Based off of \href{https://en.wikipedia.org/wiki/User:Gbuvn}{this
+person's} \href{https://gitlab.com/gbuvn1/opinion-polling-graph}{code on
+GitLab}, which was used for LOESS regressions of election polls (from
+polling firms such as Abacus Data, Léger, and Ipsos) on Wikipedia, such
+as
+\href{https://commons.wikimedia.org/wiki/File:Opinion_polling_graph_for_the_next_United_Kingdom_general_election_(post-2024).svg}{this
+one}.
+
+The previous graph (as seen below) was made by Wikipedia user ST2407 but
+stopped being updated for a long time and was
+\href{https://en.wikipedia.org/w/index.php?title=Opinion_polling_for_the_46th_Canadian_federal_election&diff=prev&oldid=1360141768}{removed
+by them} from Wikipedia.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Current graph}]{https://github.com/user-attachments/assets/9fae70fc-e1e4-4364-941f-d509792582c1}}
+\caption{Current graph}
+\end{figure}
+
+\subsection{CSV Updates}\label{csv-updates}
+
+\href{update_polls.py}{\texttt{update\_polls.py}} checks the Wikipedia
+page's ``Table of polls'' section daily for new government approval
+polls, parses the wikitext directly (rather than scraping rendered
+HTML), and appends any new rows to
+\texttt{carney\ government\ approval\ polls.csv}, skipping firms listed
+in
+\href{Which\%20polling\%20firms\%20to\%20inlcude.md}{\texttt{Which\ polling\ firms\ to\ inlcude.md}}.
+This runs via a scheduled
+\href{.github/workflows/update-polls.yml}{GitHub Actions workflow},
+which also re-renders the LOESS plot and opens a GitHub issue
+summarizing any new polls when the CSV changes. I will also try to
+update the original Wikipedia table with new polls. A future project
+could be to scrape new polls directly from the pollters websites.
+
+Which polling firms to include (broken down into already included on
+Wikipedia and not already included) and which ones should not be incuded
+(ex. because they PM poll Carney favourability rather than approval).
+
+Polls that are included are both PM Carney's personal approval and
+government approval, just not his personal favourability.
+
+Also, I should do a hypothesis test at 5\% significance level if there
+actually is a difference between government approval and PM Carney's
+personal approval.
+
+I will try to see if I can add more (wrote ``done'' in the chart below
+for the pollsters that I checked to make sure that I included all
+compatible polls).
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Included already: & To include: & Do not include: \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Abacus Data & Ekos & Nanos Research \\
+Innovative Research & Research Co. & Mainstreet Research \\
+Spark Insights & Angus Reid & Pallas Data \\
+Léger & - & Kolosowski Strategies \\
+Ipsos (done) & - & Pollera \\
+Liaison Strategies (someone added 38 of them on one day!) & - & - \\
+\end{longtable}
+}
+
+\end{document}

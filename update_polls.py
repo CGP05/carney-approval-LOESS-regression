@@ -64,7 +64,7 @@ def api_get(params: dict) -> dict:
 
 def find_table_of_polls_section() -> str:
     """
-    Locate the 'Table of polls' section nested under 'Government approval polls'.
+    Locate the 'Table of polls' section.
     """
     data = api_get(
         {
@@ -75,20 +75,14 @@ def find_table_of_polls_section() -> str:
     )
     sections = data["parse"]["sections"]
 
-    in_government_approval = False
-
     for section in sections:
         title = section["line"]
-        level = section["toclevel"]
-
-        if level == 1:
-            in_government_approval = title == "Government approval polls"
-
-        if in_government_approval and title == "Table of polls":
+        
+        if title == "Table of polls":
             return section["index"]
 
     raise RuntimeError(
-        "Could not find the 'Table of polls' section under Government approval polls."
+        "Could not find the 'Table of polls' section."
     )
 
 

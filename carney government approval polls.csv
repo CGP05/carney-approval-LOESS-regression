@@ -1,4 +1,6 @@
 Polling_firm,Last_date_of_polling,Approve,Disapprove,Unsure/neither,Margin_of_error,Sample_size,Polling_method,Net_approval
+Liaison Strategies,07-Nov-26,65%,28%,7%,±3.1 pp,"1,000",IVR,37%
+Abacus Data,04-Nov-26,57%,27%,15%,±2.2 pp,"1,926",Online,30%
 Liaison Strategies,31-Oct-26,64%,28%,8%,±3.1 pp,"1,000",IVR,36%
 Liaison Strategies,24-Oct-26,65%,27%,8%,±3.1 pp,"1,000",IVR,38%
 Abacus Data,21-Oct-26,59%,26%,15%,±2.5 pp,"1,500",Online,33%
@@ -33,7 +35,9 @@ Abacus Data,02-Jul-26,54%,31%,15%,±2.0 pp,"2,366",Online,23%
 Liaison Strategies,27-Jun-26,58%,36%,6%,±2.5 pp,"1,526",IVR,22%
 Léger,22-Jun-26,57%,36%,8%,±2.5 pp,"1,528",Online,21%
 Liaison Strategies,20-Jun-26,57%,36%,7%,±2.5 pp,"1,526",IVR,21%
+Abacus Data,17-Jun-26,45,37,6,9,2,1,1
 Liaison Strategies,13-Jun-26,57%,37%,6%,±2.5 pp,"1,526",IVR,20%
+Angus Reid,10-Jun-26,41,36,7,12,2,,1
 Liaison Strategies,06-Jun-26,55%,39%,6%,±2.5 pp,"1,526",IVR,16%
 Abacus Data,02-Jun-26,52%,31%,16%,±2.2 pp,"1,920",Online,21%
 Liaison Strategies,31-May-26,57%,38%,5%,±2.5 pp,"1,526",IVR,19%
@@ -46,6 +50,7 @@ Liaison Strategies,02-May-26,60%,32%,8%,±3.1 pp,"1,000",IVR,28%
 Léger,26-Apr-26,57%,35%,8%,±2.51 pp,"1,521",Online,22%
 Liaison Strategies,25-Apr-26,62%,31%,7%,±3.1 pp,"1,000",IVR,31%
 Abacus Data,22-Apr-26,54%,29%,17%,±2.2 pp,"2,000",Online,25%
+Angus Reid,20-Apr-26,42,35,7,12,2,-,1
 Liaison Strategies,18-Apr-26,62%,29%,9%,±3.1 pp,"1,000",IVR,33%
 Liaison Strategies,11-Apr-26,60%,29%,11%,±3.1 pp,"1,000",IVR,31%
 Spark Insights,08-Apr-26,65%,35%,—N/a,—N/a,"4,026",Online,30%

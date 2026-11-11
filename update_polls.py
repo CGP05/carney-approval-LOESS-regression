@@ -174,7 +174,7 @@ def parse_row(cells):
 
     approve = parse_percent(cells[3])
     disapprove = parse_percent(cells[4])
-    net = parse_percent(cells[9]).lstrip("+")
+    net = parse_percent(cells[8]).lstrip("+")
 
     if not net or net == "—N/a":
         try:

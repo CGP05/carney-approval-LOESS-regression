@@ -87,9 +87,7 @@ def find_table_of_polls_section() -> str:
         if in_government_approval and title == "Table of polls":
             return section["index"]
 
-    raise RuntimeError(
-        "Could not find the 'Table of polls' section under Government approval polls."
-    )
+    raise RuntimeError("Could not find the 'Table of polls' section under Government approval polls.")
 
 
 def fetch_table_wikitext() -> str:
@@ -240,6 +238,11 @@ def main() -> None:
             f"Skipping {len(excluded)} row(s) from excluded firms: {sorted(excluded['Polling_firm'].unique())}"
         )
     scraped = scraped[~scraped["Polling_firm"].isin(EXCLUDED_FIRMS)].copy()
+    
+    scraped = scraped.drop_duplicates(
+    subset=["Polling_firm", "Last_date_of_polling"],
+    keep="first"
+)
 
     existing = pd.read_csv(CSV_PATH)
     existing["Last_date_of_polling"] = pd.to_datetime(

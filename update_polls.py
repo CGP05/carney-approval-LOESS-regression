@@ -180,15 +180,6 @@ def parse_row(cells):
     disapprove = parse_percent(cells[4])
     net = parse_percent(cells[8]).lstrip("+")
 
-    if not net or net == "—N/a":
-        try:
-            app_val = float(approve.rstrip("%"))
-            dis_val = float(disapprove.rstrip("%"))
-            diff = app_val - dis_val
-            net = f"{int(diff)}%" if diff.is_integer() else f"{diff:.1f}%"
-        except ValueError:
-            net = "—N/a"
-
     return {
         "Polling_firm": firm,
         "Last_date_of_polling": date,

@@ -1,21 +1,39 @@
-carney-approval-LOESS-regression.Rproj
-debug_wikitext.txt
-*.txt
-
+# --- R & RStudio ---
 *.Rproj.user
 *.Rhistory
 *.RData
 *.Ruserdata
-*.Rprofile
-*.Rproj
+# Keep .Rproj tracked so RStudio users open in the right working directory
 
+# --- Local Environment & IDE Settings ---
+.Rprofile
+.vscode/
+.posit/
+
+# --- Python Bytecode & Test Caches ---
 __pycache__/
 *.pyc
-
-.vscode/
+.pytest_cache/
+.mypy_cache/
 .ruff_cache/
+
+# --- Temporary / Debug Files ---
+debug_wikitext.txt
+new_polls.txt
+*.tmp
+*.bak
 *.swp
 *.swo
-*.bak
-*.tmp
-.posit/assistant
+
+# --- LaTeX Build Artifacts ---
+*.aux
+*.log
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# --- OS System Files ---
+.DS_Store
+Thumbs.db
+desktop.ini

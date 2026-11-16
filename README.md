@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Carney Government Non-Linear Approval Rating Tracker
 
 ## Overview

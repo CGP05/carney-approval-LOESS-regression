@@ -8,7 +8,7 @@ SELECT
     Sample_size,
     Polling_method,
     Net_approval
-FROM my_table
+FROM carney_polls
 WHERE Approve IN ('45', '42', '41')
 ORDER BY 
     CASE 

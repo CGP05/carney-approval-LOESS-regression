@@ -1,4 +1,3 @@
--- Approval by polling method
 SELECT 
     Polling_method,
     AVG(CAST(Replace(Approve, '%', '') AS REAL)) as avg_approval,
